@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>ITEP 413: Information Assurance and Security 2 | Finals Reviewer</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-alt: #f1f5f9;
+      --primary: #1e3a8a;
+      --primary-hover: #1d4ed8;
+      --primary-light: #dbeafe;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --correct-bg: #dcfce7;
+      --correct-border: #16a34a;
+      --correct-text: #14532d;
+      --wrong-bg: #fee2e2;
+      --wrong-border: #dc2626;
+      --wrong-text: #7f1d1d;
+      --badge-bg: #e0e7ff;
+      --badge-text: #3730a3;
+      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    [data-theme="dark"] {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-alt: #1f2937;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --primary-light: #1e293b;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: #374151;
+      --correct-bg: #064e3b;
+      --correct-border: #10b981;
+      --correct-text: #a7f3d0;
+      --wrong-bg: #7f1d1d;
+      --wrong-border: #ef4444;
+      --wrong-text: #fecaca;
+      --badge-bg: #312e81;
+      --badge-text: #c7d2fe;
+      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 12px 12px 90px 12px;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      color: #ffffff;
+      padding: 20px 18px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    [data-theme="dark"] header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+    }
+
+    .header-sub {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    header h1 {
+      font-size: 1.35rem;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      font-weight: 800;
+    }
+
+    header p {
+      font-size: 0.88rem;
+      opacity: 0.9;
+    }
+
+    /* Quick Action Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tool-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-tool {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Scrollable Tab Navigation */
+    .nav-tabs-wrapper {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      margin-bottom: 16px;
+      background: var(--bg);
+      padding: 4px 0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      white-space: nowrap;
+      padding: 10px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      padding: 20px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Filter Controls */
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .score-badge {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      max-width: 380px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    /* Practice Flashcard Styles */
+    .scenario-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: transform 0.15s;
+    }
+
+    .scenario-num {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: var(--primary);
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .scenario-q {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .scenario-answer {
+      background: var(--surface);
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    .reveal-btn {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* MCQ Quiz Styles */
+    .question-header {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      text-align: left;
+      padding: 14px 16px;
+      background: var(--surface-alt);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.98rem;
+      color: var(--text);
+      transition: all 0.15s;
+      line-height: 1.4;
+      min-height: 50px;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .option-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .rationale {
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--surface-alt);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 16px;
+      min-height: 48px;
+    }
+
+    /* Study Notes Styles */
+    .note-section {
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+
+    .note-section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .note-title {
+      font-size: 1.25rem;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .note-card {
+      background: var(--surface-alt);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .note-card h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .highlight-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    /* Responsive Tables */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--surface-alt);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Mobile Quick Nav Bar */
+    .bottom-status {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+      z-index: 99;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 8px 8px 80px 8px;
+      }
+      header {
+        padding: 16px 14px;
+      }
+      header h1 {
+        font-size: 1.2rem;
+      }
+      .card {
+        padding: 16px 12px;
+      }
+      .tab-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+      }
+      .question-text {
+        font-size: 1.05rem;
+      }
+      .option-btn {
+        padding: 12px 14px;
+        font-size: 0.92rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- University & Course Header -->
+  <header>
+    <div class="header-sub">Republic of the Philippines • LSPU • CCS</div>
+    <h1>ITEP 413: Information Assurance and Security 2</h1>
+    <p>Finals Comprehensive Reviewer: Notes, 10 Scenarios, 32 MCQs &amp; 47 Acronyms</p>
+  </header>
+
+  <!-- Top Utilities -->
+  <div class="top-bar">
+    <div class="tool-group">
+      <button class="btn-tool" onclick="toggleTheme()" id="theme-btn">🌙 Dark Mode</button>
+      <button class="btn-tool" onclick="adjustFontSize(1)">A+ Larger</button>
+      <button class="btn-tool" onclick="adjustFontSize(-1)">A- Smaller</button>
+    </div>
+    <div class="tool-group">
+      <a href="https://github.com/03DxD12/Finals-413---1st-Sem" target="_blank" class="btn-tool" style="text-decoration:none; color:inherit;">
+        ⭐ GitHub Repo
+      </a>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs-wrapper">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('notes')">📖 Study Notes</button>
+      <button class="tab-btn" onclick="switchTab('scenarios')">⚡ Practice Q&amp;A (1-10)</button>
+      <button class="tab-btn" onclick="switchTab('mcq')">📝 MCQ Quiz (32)</button>
+      <button class="tab-btn" onclick="switchTab('acronym')">🔤 Acronym Quiz (47)</button>
+      <button class="tab-btn" onclick="switchTab('list')">📋 Acronym Reference</button>
+    </div>
+  </div>
+
+  <!-- SECTION 1: STUDY NOTES -->
+  <div id="section-notes" class="card">
+    <!-- Topic 1 -->
+    <div class="note-section">
+      <div class="note-title">1. Professional Education, Training, and Certification</div>
+      
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Meaning</th>
+              <th>Real-World Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Awareness</strong></td>
+              <td>Short messages that make everyone notice security and know what to do.</td>
+              <td>A reminder to all staff about a new SMS/email phishing campaign.</td>
+            </tr>
+            <tr>
+              <td><strong>Training</strong></td>
+              <td>Teaching a specific, hands-on skill for a specific job role.</td>
+              <td>A hands-on course on restoring enterprise servers from backup.</td>
+            </tr>
+            <tr>
+              <td><strong>Education</strong></td>
+              <td>Long-term academic learning that builds understanding and judgment.</td>
+              <td>A university degree program (e.g., BSIT, Master's in Cybersecurity).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="highlight-box">
+        💡 <strong>Key Memory Aid:</strong> Awareness tells you <em>that</em>, Training teaches you <em>how</em>, Education helps you understand <em>why</em>.
+      </div>
+
+      <div class="note-card">
+        <h4>NIST SP 800-50 Rev. 1 (2024) Learning Cycle</h4>
+        <p>A cybersecurity learning program is an ongoing continuous cycle: <strong>Plan &rarr; Deliver &rarr; Measure Results &rarr; Improve</strong>.<br>
+        <em>Critical reminder:</em> Completing a training module is <strong>not proof</strong> that user behavior has actually changed.</p>
+      </div>
+
+      <div class="note-card">
+        <h4>Self-Study &amp; Ethical Practice Rules</h4>
+        <p>Practice strictly on systems you own or authorized training environments (e.g., <strong>OWASP Juice Shop, WebGoat, official CTFs</strong>). Unauthorized testing is <strong>illegal even with good intentions</strong>, and verbal permission is <strong>never legally sufficient</strong>.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Certification Type</th>
+              <th>Core Focus</th>
+              <th>Leading Examples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Vendor-Neutral</strong></td>
+              <td>Fundamental concepts that apply across many products and platforms.</td>
+              <td>CompTIA Security+, ISC2 (CISSP, SSCP, CC), ISACA (CISA, CISM), GIAC.</td>
+            </tr>
+            <tr>
+              <td><strong>Vendor-Specific</strong></td>
+              <td>Hands-on operational skills for one company's specific proprietary products.</td>
+              <td>Fortinet NSE, Cisco (CCNA/CCNP), Microsoft Azure Security, AWS Security.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-card">
+        <h4>Credential Maintenance &amp; Roadmap</h4>
+        <p>• <strong>CPEs:</strong> Credentials require Continuing Professional Education (CPE) credits and annual maintenance fees to stay active.<br>
+        • <strong>Associate of ISC2:</strong> A candidate who passes an ISC2 exam without the required 5 years of verified experience becomes an Associate of ISC2 while earning it.<br>
+        • <strong>Recommended Career Roadmap:</strong> BSIT Degree &rarr; Entry-level vendor-neutral (CC/Security+) &rarr; Practitioner/vendor-specific (SSCP/NSE) &rarr; Advanced/Management (CISSP/CISM). Reviewed annually.</p>
+      </div>
+
+      <div class="note-card">
+        <h4>Cybersecurity Workforce Frameworks</h4>
+        <p>• <strong>DoD Manual 8140.03 (Feb 2023):</strong> Replaced DoD 8570.01-M. Ties baseline qualification requirements directly to defined <strong>work roles</strong> in the DoD Cyber Workforce Framework rather than relying solely on certifications.<br>
+        • <strong>NICE Workforce Framework (NIST SP 800-181):</strong> Standard common language for cybersecurity roles, tasks, knowledge, and skills for job descriptions and career planning.<br>
+        • <strong>Fortinet Micro-Credentials:</strong> Always follow the instructor's latest syllabus; never share accounts or exam answers.</p>
+      </div>
+    </div>
+
+    <!-- Topic 2 -->
+    <div class="note-section">
+      <div class="note-title">2. Ethics, Compliance, and Laws</div>
+
+      <div class="note-card">
+        <h4>Law versus Ethics</h4>
+        <p>• <strong>Law:</strong> Written by government, enforced by courts; penalties include monetary fines or imprisonment.<br>
+        • <strong>Ethics:</strong> Moral values and professional codes of conduct; penalties include loss of trust, employment termination, or revocation of credentials.<br>
+        • <strong>Key Principle:</strong> An action can be <strong>legal but unethical</strong> (e.g., browsing a celebrity's medical records out of curiosity without clinical need). Professional codes often expect higher conduct than the law.</p>
+      </div>
+
+      <div class="note-card">
+        <h4>ISC2 Code of Ethics (Strict Priority Order)</h4>
+        <ol style="margin-left: 20px; line-height: 1.8;">
+          <li><strong>Protect society, the common good, and public trust.</strong></li>
+          <li><strong>Act honorably, honestly, justly, responsibly, and legally.</strong></li>
+          <li><strong>Provide diligent and competent service.</strong></li>
+          <li><strong>Advance and protect the profession.</strong></li>
+        </ol>
+        <p style="margin-top: 8px;"><em>Hierarchy Rule:</em> If ethical duties conflict, the earlier canon <strong>always comes first</strong>.</p>
+      </div>
+
+      <div class="note-card">
+        <h4>Professional Ethical Conduct</h4>
+        <p>• <strong>Responsible Disclosure:</strong> Upon noticing a security flaw, stop immediately, refrain from downloading or copying data, and report the vulnerability privately to the owner. Never exploit, publicly post, or demand money.<br>
+        • <strong>Conflict of Interest:</strong> Fully disclose any conflict and step away from the decision (<strong>recusal</strong>).<br>
+        • <strong>Improper Instructions:</strong> Explicitly refuse unethical orders (e.g., hiding incident logs from auditors) and escalate through proper reporting channels.</p>
+      </div>
+
+      <div class="highlight-box">
+        ⚠️ <strong>Compliance &ne; Security:</strong> Compliance is a minimum legal/contractual baseline and proof of adherence. An organization can pass every regulatory audit and still suffer a catastrophic security breach!
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Regulation / Standard</th>
+              <th>Entity Covered</th>
+              <th>Protected Asset</th>
+              <th>Core Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FISMA</strong></td>
+              <td>U.S. federal agencies &amp; contractors</td>
+              <td>Federal information &amp; systems</td>
+              <td>Risk-based, continuous monitoring using NIST standards (SP 800-37, SP 800-53).</td>
+            </tr>
+            <tr>
+              <td><strong>HIPAA</strong></td>
+              <td>Health plans, providers, clearinghouses</td>
+              <td>Protected Health Information (PHI)</td>
+              <td>Administrative, physical, and technical safeguards; Privacy, Security &amp; Breach rules.</td>
+            </tr>
+            <tr>
+              <td><strong>GLBA</strong></td>
+              <td>Financial institutions (banks, lenders)</td>
+              <td>Nonpublic Personal Information (NPI)</td>
+              <td>Mandatory privacy notices and a written information security safeguards program.</td>
+            </tr>
+            <tr>
+              <td><strong>SOX</strong></td>
+              <td>U.S. publicly traded corporations</td>
+              <td>Financial records &amp; reporting</td>
+              <td>Internal controls; Section 302 requires CEO &amp; CFO to certify financial report accuracy.</td>
+            </tr>
+            <tr>
+              <td><strong>FERPA</strong></td>
+              <td>Schools receiving U.S. federal education funds</td>
+              <td>Student education records &amp; grades</td>
+              <td>Prohibits disclosure without prior signed, written student consent.</td>
+            </tr>
+            <tr>
+              <td><strong>CIPA</strong></td>
+              <td>Schools &amp; libraries with E-Rate discounts</td>
+              <td>Minors online</td>
+              <td>Enforce Internet Safety Policies and technological content filtering against harmful material.</td>
+            </tr>
+            <tr>
+              <td><strong>PCI DSS</strong></td>
+              <td>Anyone handling payment card data</td>
+              <td>Cardholder data (CHD)</td>
+              <td><strong>Contractual industry standard (not a law)</strong> with 12 requirements; current is v4.0.1 (v3.2.1 retired Mar 2024). Tokenization reduces scope.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Topic 3 -->
+    <div class="note-section">
+      <div class="note-title">3. FISMA &amp; Philippine Cyber Legislation</div>
+
+      <div class="note-card">
+        <h4>FISMA Governance &amp; OPM Breach Lessons</h4>
+        <p>• Passed in 2002 and modernized in 2014. Applies to federal agencies and their IT contractors.<br>
+        • <strong>Governance Roles:</strong> OMB sets overarching policy; DHS/CISA oversees operations; NIST authors standards (SP 800-37 RMF, SP 800-53 controls); Inspectors General conduct independent audits; agencies report yearly.<br>
+        • <strong>Continuous Monitoring:</strong> FISMA mandates continuous monitoring because systems and cyber threats evolve daily.<br>
+        • <strong>2015 OPM Breach Lessons:</strong> Maintain a 100% complete system inventory, enforce strong authentication (MFA/smart cards), and patch vulnerabilities on time.</p>
+      </div>
+
+      <div class="note-card">
+        <h4>Philippine Laws (RA 10173 &amp; RA 10175)</h4>
+        <p>• <strong>RA 10173 (Data Privacy Act of 2012):</strong> Governs personal information processing based on three mandatory pillars:<br>
+        &nbsp;&nbsp;1. <strong>Transparency:</strong> Inform data subjects why and how their data is gathered.<br>
+        &nbsp;&nbsp;2. <strong>Legitimate Purpose:</strong> Process data only for lawful, declared reasons.<br>
+        &nbsp;&nbsp;3. <strong>Proportionality:</strong> Collect only the minimal necessary data.<br>
+        &nbsp;&nbsp;<em>Enforcement:</em> National Privacy Commission (NPC). Security breaches must generally be reported within <strong>72 hours</strong> of knowledge.<br>
+        • <strong>RA 10175 (Cybercrime Prevention Act of 2012):</strong> Establishes criminal penalties for offenses like illegal access, illegal interception, and data interference.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PRACTICE SCENARIOS (FLASHCARDS 1-10) -->
+  <div id="section-scenarios" class="card hidden">
+    <div class="controls">
+      <h2 style="font-size:1.2rem; font-weight:800;">Top 10 Practice Scenarios &amp; Answers</h2>
+      <button class="btn-tool" onclick="toggleAllAnswers()">Toggle All Answers</button>
+    </div>
+    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;">
+      Test your recall! Try answering each question mentally or verbally before tapping to reveal the answer.
+    </p>
+
+    <div id="scenarios-container"></div>
+  </div>
+
+  <!-- SECTION 3: MULTIPLE CHOICE QUIZ -->
+  <div id="section-mcq" class="card hidden">
+    <div class="controls">
+      <div>
+        <label for="mcq-topic" style="font-weight:700; margin-right:6px; font-size:0.9rem;">Topic Filter:</label>
+        <select id="mcq-topic" onchange="resetMcq()">
+          <option value="all">All Topics (32 Questions)</option>
+          <option value="Practice Scenarios">Practice Scenarios (1-10)</option>
+          <option value="Education & Certifications">Education, Training &amp; Certifications</option>
+          <option value="Ethics & Compliance">Ethics, Compliance &amp; Laws</option>
+          <option value="FISMA & Frameworks">FISMA, NIST &amp; Frameworks</option>
+        </select>
+      </div>
+      <span class="score-badge" id="mcq-score">Score: 0 / 0</span>
+    </div>
+
+    <div id="mcq-quiz-area">
+      <div class="question-header" id="mcq-progress">Question 1 of 32</div>
+      <div class="question-text" id="mcq-question"></div>
+      <div class="options-grid" id="mcq-options"></div>
+      <div class="rationale hidden" id="mcq-rationale"></div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn-primary hidden" id="mcq-next-btn" onclick="nextMcq()">Next Question</button>
+        <button class="btn-primary" style="background: #64748b;" onclick="resetMcq()">Shuffle &amp; Restart</button>
+      </div>
+    </div>
+
+    <div id="mcq-result-area" class="hidden">
+      <h2 style="font-size:1.4rem; font-weight:800;">Quiz Completed!</h2>
+      <p id="mcq-final-text" style="margin: 15px 0; font-size: 1.1rem;"></p>
+      <button class="btn-primary" onclick="resetMcq()">Retake MCQ Quiz</button>
+    </div>
+  </div>
+
+  <!-- SECTION 4: ACRONYM DRILL QUIZ -->
+  <div id="section-acronym" class="card hidden">
+    <div class="controls">
+      <div>
+        <label for="acronym-category" style="font-weight:700; margin-right:6px; font-size:0.9rem;">Category:</label>
+        <select id="acronym-category" onchange="resetAcronymQuiz()">
+          <option value="all">All Acronyms (47)</option>
+          <option value="Laws & Compliance">Laws &amp; Compliance</option>
+          <option value="Certifications & Orgs">Certifications &amp; Orgs</option>
+          <option value="Frameworks & Agencies">Frameworks, Agencies &amp; General</option>
+        </select>
+      </div>
+      <span class="score-badge" id="acr-score">Score: 0 / 0</span>
+    </div>
+
+    <div id="acr-quiz-area">
+      <div class="question-header" id="acr-progress">Question 1</div>
+      <div class="question-text" id="acr-question"></div>
+      <div class="options-grid" id="acr-options"></div>
+      <div class="rationale hidden" id="acr-rationale"></div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn-primary hidden" id="acr-next-btn" onclick="nextAcronym()">Next Acronym</button>
+        <button class="btn-primary" style="background: #64748b;" onclick="resetAcronymQuiz()">Shuffle &amp; Restart</button>
+      </div>
+    </div>
+
+    <div id="acr-result-area" class="hidden">
+      <h2 style="font-size:1.4rem; font-weight:800;">Acronym Drill Finished!</h2>
+      <p id="acr-final-text" style="margin: 15px 0; font-size: 1.1rem;"></p>
+      <button class="btn-primary" onclick="resetAcronymQuiz()">Restart Acronym Drill</button>
+    </div>
+  </div>
+
+  <!-- SECTION 5: ACRONYM REFERENCE TABLE -->
+  <div id="section-list" class="card hidden">
+    <div class="controls">
+      <input type="text" id="search-input" placeholder="🔍 Search acronym, meaning, or category..." onkeyup="filterTable()">
+      <span id="table-count" style="font-weight:700; color: var(--text-muted); font-size:0.9rem;">Showing 47 items</span>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;">Acronym</th>
+            <th style="width: 50%;">Meaning</th>
+            <th style="width: 25%;">Category</th>
+          </tr>
+        </thead>
+        <tbody id="acronym-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Top 10 Practice Flashcard Scenarios
+  const scenariosData = [
+    {
+      id: 1,
+      q: "A poster for all staff, a vendor course for firewall administrators, and a master's degree in cybersecurity: label each as awareness, training, or education.",
+      answer: "• <strong>Poster:</strong> Awareness (general reminders for everyone to notice security).<br>• <strong>Vendor course:</strong> Training (hands-on skills for a specific job).<br>• <strong>Master's degree:</strong> Education (deep academic theory and long-term judgment)."
+    },
+    {
+      id: 2,
+      q: "A friend offers you a copy of the real exam answers. Which ISC2 canon is at stake and what do you do?",
+      answer: "• <strong>Canon:</strong> Canon 2 — <em>Act honorably, honestly, justly, responsibly, and legally.</em><br>• <strong>Action:</strong> Refuse the answers, do not look at them, and report the breach to ISC2."
+    },
+    {
+      id: 3,
+      q: "Which U.S. law requires financial institutions to keep a written information security program for customer information?",
+      answer: "• <strong>Law:</strong> Gramm-Leach-Bliley Act (GLBA), specifically the <strong>GLBA Safeguards Rule</strong> (protecting Nonpublic Personal Information / NPI)."
+    },
+    {
+      id: 4,
+      q: "A company asks a university for a student's grades. Which law controls whether the school may release them, and what is usually needed?",
+      answer: "• <strong>Law:</strong> Family Educational Rights and Privacy Act (FERPA).<br>• <strong>Needed:</strong> Signed, written consent from the student."
+    },
+    {
+      id: 5,
+      q: "A public company's chief executive must certify its financial reports. Which law requires this?",
+      answer: "• <strong>Law:</strong> Sarbanes-Oxley Act of 2002 (SOX), specifically <strong>Section 302</strong>."
+    },
+    {
+      id: 6,
+      q: "Is PCI DSS a law with criminal penalties? Explain.",
+      answer: "• <strong>Answer:</strong> <strong>No.</strong><br>• <strong>Explanation:</strong> It is an industry contractual standard set by major credit card brands, not a government law. Violations result in bank fines, higher transaction fees, or losing card-processing rights, not criminal jail time."
+    },
+    {
+      id: 7,
+      q: "After an incident, a manager wants to punish the employee who reported it. How does this hurt a security program?",
+      answer: "• <strong>Impact:</strong> It creates a <strong>culture of fear</strong> where employees hide mistakes and stop reporting incidents, delaying detection and letting attacks get worse."
+    },
+    {
+      id: 8,
+      q: "A Philippine startup collects customers' email addresses. Name the three principles of RA 10173 it must follow.",
+      answer: "• <strong>Transparency:</strong> Inform users how and why their personal data is collected.<br>• <strong>Legitimate Purpose:</strong> Collect data only for a lawful, declared reason.<br>• <strong>Proportionality:</strong> Collect only the minimum data needed for that specific purpose."
+    },
+    {
+      id: 9,
+      q: "An agency says last year's FISMA review was fine, so it can stop monitoring this year. What is wrong with this thinking?",
+      answer: "• <strong>Explanation:</strong> FISMA mandates <strong>continuous monitoring</strong>, not a one-time check. Systems, configurations, and cyber threats change daily, so last year's pass does not guarantee security today."
+    },
+    {
+      id: 10,
+      q: "While browsing a company's website, you notice a flaw that exposes customer data. List what you should and should not do.",
+      answer: "• <strong>Should do:</strong> Stop immediately, note the basic URL/issue without downloading data, and report it privately to the company's security team.<br>• <strong>Should NOT do:</strong> Do not download customer data, test/exploit the flaw further, post it publicly, or demand money."
+    }
+  ];
+
+  // 32 Complete Multiple Choice Questions
+  const mcqData = [
+    // PRACTICE SCENARIOS (1-10)
+    {
+      topic: "Practice Scenarios",
+      q: "A poster for all staff, a vendor course for firewall administrators, and a master's degree in cybersecurity: label each in exact order.",
+      options: [
+        "Awareness, Training, Education",
+        "Training, Education, Awareness",
+        "Education, Training, Awareness",
+        "Awareness, Education, Training"
+      ],
+      answer: 0,
+      rationale: "Poster = Awareness (general reminders for everyone). Vendor course = Training (hands-on skills for a specific job). Master's degree = Education (deep academic theory and long-term study)."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "A friend offers you a copy of the real exam answers. Which ISC2 canon is at stake and what do you do?",
+      options: [
+        "Canon: Act honorably, honestly, justly, responsibly, and legally. Action: Refuse the answers, do not look at them, and report the breach to ISC2.",
+        "Canon: Advance and protect the profession. Action: Accept the answers to inspect exam leaks and post them online.",
+        "Canon: Provide diligent and competent service. Action: Ignore the message and delete it without reporting.",
+        "Canon: Protect society, the common good, and public trust. Action: Use the answers only to verify your own study notes."
+      ],
+      answer: 0,
+      rationale: "The second ISC2 canon requires acting honorably, honestly, justly, responsibly, and legally. You must refuse the answers, avoid looking at them, and report the breach to ISC2."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "Which U.S. law requires financial institutions to keep a written information security program for customer information?",
+      options: [
+        "Gramm-Leach-Bliley Act (GLBA) (specifically the GLBA Safeguards Rule)",
+        "Sarbanes-Oxley Act of 2002 (SOX) (Section 302)",
+        "Family Educational Rights and Privacy Act (FERPA)",
+        "Federal Information Security Modernization Act (FISMA)"
+      ],
+      answer: 0,
+      rationale: "The Gramm-Leach-Bliley Act (GLBA), specifically the GLBA Safeguards Rule, requires financial institutions to maintain privacy notices and a written safeguards program for Nonpublic Personal Information (NPI)."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "A company asks a university for a student's grades. Which law controls whether the school may release them, and what is usually needed?",
+      options: [
+        "Law: Family Educational Rights and Privacy Act (FERPA). Needed: Signed, written consent from the student.",
+        "Law: Children's Internet Protection Act (CIPA). Needed: Approval from the school's network administrator.",
+        "Law: Health Insurance Portability and Accountability Act (HIPAA). Needed: Verbal consent from the registrar.",
+        "Law: Gramm-Leach-Bliley Act (GLBA). Needed: A formal audit report."
+      ],
+      answer: 0,
+      rationale: "FERPA protects student education records at schools receiving U.S. federal education funds and requires signed, written consent from the student before release."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "A public company's chief executive must certify its financial reports. Which law requires this?",
+      options: [
+        "Sarbanes-Oxley Act of 2002 (SOX) (Section 302)",
+        "Gramm-Leach-Bliley Act (GLBA)",
+        "Payment Card Industry Data Security Standard (PCI DSS)",
+        "Federal Information Security Modernization Act (FISMA)"
+      ],
+      answer: 0,
+      rationale: "The Sarbanes-Oxley Act of 2002 (SOX), specifically Section 302, requires internal controls and executive certification of financial reporting accuracy."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "Is PCI DSS a law with criminal penalties?",
+      options: [
+        "No. It is an industry contractual standard set by major card brands; violations result in bank fines, higher fees, or losing card-processing rights, not jail time.",
+        "Yes. It is a federal criminal statute enforced by the FTC that carries prison sentences.",
+        "Yes. It is an international treaty enforced by courts worldwide with felony penalties.",
+        "No. It is an optional guideline with no financial penalties or enforcement mechanisms."
+      ],
+      answer: 0,
+      rationale: "PCI DSS is an industry contractual standard set by major card brands, not a government law. Violations lead to bank fines, higher fees, or losing card-processing rights rather than criminal jail time."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "After an incident, a manager wants to punish the employee who reported it. How does this hurt a security program?",
+      options: [
+        "It creates a culture of fear where employees hide mistakes and stop reporting incidents, delaying detection and letting attacks get worse.",
+        "It violates the HIPAA Privacy Rule and automatically triggers a 72-hour NPC fine.",
+        "It forces the organization to upgrade from PCI DSS v3.2.1 to v4.0.1 immediately.",
+        "It removes the organization's protection under the NICE Workforce Framework."
+      ],
+      answer: 0,
+      rationale: "Punishing employees who report incidents fosters a culture of fear, causing staff to hide mistakes and stop reporting issues, which delays detection and worsens attacks."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "A Philippine startup collects customers' email addresses. What are the three principles of RA 10173 it must follow?",
+      options: [
+        "Transparency, Legitimate Purpose, and Proportionality",
+        "Confidentiality, Integrity, and Availability",
+        "Plan, Deliver, and Measure Results",
+        "Administrative, Physical, and Technical Safeguards"
+      ],
+      answer: 0,
+      rationale: "RA 10173 (Data Privacy Act of 2012) requires Transparency (inform users how/why data is collected), Legitimate Purpose (collect only for a lawful, declared reason), and Proportionality (collect only the minimum data needed)."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "An agency says last year's FISMA review was fine, so it can stop monitoring this year. What is wrong with this thinking?",
+      options: [
+        "FISMA requires continuous monitoring, not a one-time check, because systems, configurations, and cyber threats change daily.",
+        "FISMA reviews are required every 10 years, so stopping after 1 year violates the 10-year cycle.",
+        "FISMA only applies to private healthcare providers, not government agencies.",
+        "Passing FISMA exempts an agency from reporting to OMB and Congress."
+      ],
+      answer: 0,
+      rationale: "FISMA requires continuous risk-based monitoring rather than a one-time check. Systems, configurations, and threats change daily, so last year's pass does not guarantee security today."
+    },
+    {
+      topic: "Practice Scenarios",
+      q: "While browsing a company's website, you notice a flaw that exposes customer data. What should you do and NOT do?",
+      options: [
+        "Should do: Stop immediately, note the basic URL/issue without taking data, and report it privately to the security team. Should NOT do: Download data, exploit further, post publicly, or demand money.",
+        "Should do: Download a few records to prove the bug exists and post a warning on social media. Should NOT do: Contact the company directly.",
+        "Should do: Run automated vulnerability scanners to map the entire server. Should NOT do: Document the URL.",
+        "Should do: Demand a bug bounty payment before revealing the flaw. Should NOT do: Report it to the company's security team."
+      ],
+      answer: 0,
+      rationale: "Responsible disclosure means stopping immediately, noting the basic URL/issue without taking data, and reporting privately to the company's security team—never downloading data, exploiting further, posting publicly, or demanding money."
+    },
+
+    // EDUCATION, TRAINING & CERTIFICATIONS
+    {
+      topic: "Education & Certifications",
+      q: "Which memory aid accurately distinguishes awareness, training, and education?",
+      options: [
+        "Awareness tells you that, training teaches you how, education helps you understand why.",
+        "Awareness teaches you how, training tells you that, education helps you understand when.",
+        "Awareness helps you understand why, training tells you that, education teaches you how.",
+        "Awareness tells you who, training tells you where, education teaches you how."
+      ],
+      answer: 0,
+      rationale: "Memory aid: awareness tells you that (noticing security), training teaches you how (specific job skills), and education helps you understand why (long-term understanding and judgment)."
+    },
+    {
+      topic: "Education & Certifications",
+      q: "According to NIST SP 800-50 Rev. 1 (2024), what is the four-step cycle of a learning program, and what is true about completing a module?",
+      options: [
+        "Plan, deliver, measure results, and improve; completing a module is not proof that behavior changed.",
+        "Design, deploy, audit, and retire; completing a module guarantees full security compliance.",
+        "Identify, protect, detect, and respond; completing a module replaces annual risk assessments.",
+        "Plan, test, certify, and renew; completing a module exempts staff from phishing simulations."
+      ],
+      answer: 0,
+      rationale: "NIST SP 800-50 Rev. 1 (2024) defines a learning program as a continuous cycle: plan, deliver, measure results, and improve. Simply completing a module does not prove behavior actually changed."
+    },
+    {
+      topic: "Education & Certifications",
+      q: "When practicing cybersecurity skills through self-study, which rule applies to testing systems?",
+      options: [
+        "Practice only on systems you own or training environments (e.g., OWASP Juice Shop, WebGoat, official CTF); unauthorized testing is illegal even with good intentions, and verbal permission is not enough.",
+        "You may test any public website as long as you have good intentions and do not steal data.",
+        "Verbal permission from a system administrator is legally sufficient for penetration testing.",
+        "Testing live corporate servers is allowed if you report any findings within 72 hours."
+      ],
+      answer: 0,
+      rationale: "Practice only on systems you own or designated training environments (OWASP Juice Shop, WebGoat, official CTFs). Unauthorized testing is illegal regardless of good intentions, and verbal permission is never enough."
+    },
+    {
+      topic: "Education & Certifications",
+      q: "What is the difference between vendor-neutral and vendor-specific certifications?",
+      options: [
+        "Vendor-neutral covers concepts across many products (e.g., CompTIA Security+, CISSP, CISA); vendor-specific covers skills for one company's products (e.g., Fortinet NSE, Cisco, AWS).",
+        "Vendor-neutral is only for managers; vendor-specific is only for entry-level students.",
+        "Vendor-neutral never expires; vendor-specific requires annual CPE credits.",
+        "Vendor-neutral focuses on hardware repair; vendor-specific focuses on legal compliance."
+      ],
+      answer: 0,
+      rationale: "Vendor-neutral certifications validate concepts across many products (CompTIA Security+, ISC2 CISSP/SSCP/CC, ISACA CISA/CISM, GIAC), while vendor-specific certifications test skills on one company's products (Fortinet NSE, Cisco, Microsoft, AWS)."
+    },
+    {
+      topic: "Education & Certifications",
+      q: "What happens if a candidate passes an ISC2 exam but lacks the required work experience?",
+      options: [
+        "They may become an Associate of ISC2 while gaining the required work experience.",
+        "Their exam score is voided and they must retake the exam after five years.",
+        "They automatically receive the full CISSP title with a temporary waiver.",
+        "They are required to earn double the annual CPE credits until hired."
+      ],
+      answer: 0,
+      rationale: "A candidate who passes an ISC2 exam without the required work experience can become an Associate of ISC2 while accumulating the necessary experience."
+    },
+    {
+      topic: "Education & Certifications",
+      q: "What is required to keep professional cybersecurity credentials active after earning them?",
+      options: [
+        "Continuing Professional Education (CPE) credits and maintenance fees, with eligible activities defined by the certifying body.",
+        "Retaking the full certification exam every 12 months.",
+        "Submitting a yearly background check to the Department of Defense.",
+        "Completing a Fortinet NSE micro-credential every semester."
+      ],
+      answer: 0,
+      rationale: "Credentials require ongoing renewal through Continuing Professional Education (CPE) credits and maintenance fees according to the certifying body's rules."
+    },
+    {
+      topic: "Education & Certifications",
+      q: "What is the recommended progression for a cybersecurity certification roadmap?",
+      options: [
+        "Degree -> entry-level vendor-neutral credential -> practitioner or vendor credentials -> management or advanced credentials (including costs/renewal, reviewed yearly).",
+        "Management credentials -> vendor-specific credentials -> entry-level vendor-neutral -> associate degree.",
+        "Vendor-specific credentials -> bachelor's degree -> Associate of ISC2 -> basic awareness posters.",
+        "CEH -> CISSP -> CISM -> entry-level CompTIA Security+."
+      ],
+      answer: 0,
+      rationale: "A strong roadmap progresses from foundation to advanced as experience grows: degree, entry-level vendor-neutral credential, practitioner/vendor credentials, then management/advanced credentials, accounting for costs/renewal and reviewed yearly."
+    },
+
+    // ETHICS, COMPLIANCE & LAWS
+    {
+      topic: "Ethics & Compliance",
+      q: "How do law and ethics differ in terms of enforcement and penalties?",
+      options: [
+        "Law is written by government and enforced by courts (fines or imprisonment); ethics are values and professional codes (loss of trust, job, or credential).",
+        "Law is enforced by professional associations; ethics are enforced by criminal courts.",
+        "Anything that is legal is automatically ethical under professional codes.",
+        "Ethics carry prison sentences, whereas laws only result in loss of reputation."
+      ],
+      answer: 0,
+      rationale: "Laws are government rules enforced by courts with fines or imprisonment. Ethics are values and professional codes enforced by loss of trust, job, or credentials. An action can be legal yet unethical (such as reading celebrity records out of curiosity)."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "What is the exact order of priority of the four canons in the ISC2 Code of Ethics?",
+      options: [
+        "(1) Protect society, the common good, and public trust; (2) Act honorably, honestly, justly, responsibly, and legally; (3) Provide diligent and competent service; (4) Advance and protect the profession.",
+        "(1) Act honorably and legally; (2) Protect society and public trust; (3) Advance the profession; (4) Provide diligent service.",
+        "(1) Provide diligent and competent service; (2) Protect society; (3) Act honorably and legally; (4) Advance and protect the profession.",
+        "(1) Advance and protect the profession; (2) Provide diligent service; (3) Act honorably; (4) Protect society."
+      ],
+      answer: 0,
+      rationale: "The ISC2 canons in strict priority order are: 1. Protect society, the common good, and public trust; 2. Act honorably, honestly, justly, responsibly, and legally; 3. Provide diligent and competent service; 4. Advance and protect the profession. Earlier canons take precedence when duties conflict."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "How should a cybersecurity professional handle a conflict of interest or an improper instruction (like hiding records from auditors)?",
+      options: [
+        "For conflict of interest: disclose it and step away from the decision (recusal). For improper instructions: refuse and escalate through the proper channel.",
+        "For conflict of interest: keep it private unless discovered. For improper instructions: follow the manager's order to protect your job.",
+        "For conflict of interest: vote in favor of your own vendor. For improper instructions: delete the records quietly.",
+        "For conflict of interest: resign immediately without explanation. For improper instructions: leak the records to the press."
+      ],
+      answer: 0,
+      rationale: "Conflicts of interest must be disclosed followed by recusal (stepping away from the decision). Improper instructions such as hiding records from auditors must be refused and escalated through proper channels."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "Why is 'compliance' NOT the same thing as 'security'?",
+      options: [
+        "Compliance is only a minimum baseline and proof of following rules; an organization can pass an audit and still be breached.",
+        "Compliance requires technical controls, whereas security only involves writing policy documents.",
+        "Compliance applies only to government agencies, whereas security applies only to private companies.",
+        "Passing one compliance assessment automatically satisfies all other legal and regulatory frameworks."
+      ],
+      answer: 0,
+      rationale: "Compliance means following applicable laws, regulations, standards, and contracts—it is a minimum baseline, not complete security. An organization can pass an audit and still suffer a breach."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "Which rule covers schools and libraries using E-Rate discounts to protect minors online via internet safety policies and content filtering?",
+      options: [
+        "CIPA (Children's Internet Protection Act)",
+        "FERPA (Family Educational Rights and Privacy Act)",
+        "HIPAA (Health Insurance Portability and Accountability Act)",
+        "SOX (Sarbanes-Oxley Act)"
+      ],
+      answer: 0,
+      rationale: "CIPA applies to schools and libraries receiving E-Rate discounts and requires an internet safety policy and content filtering to protect minors online."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "What are the three categories of safeguards under the HIPAA Security Rule, and what do they protect?",
+      options: [
+        "Administrative (policies, risk analysis, training), Physical (locks, device disposal), and Technical (access control, audit logs, encryption); they protect Protected Health Information (PHI).",
+        "Preventive, Detective, and Corrective safeguards; they protect Nonpublic Personal Information (NPI).",
+        "Transparency, Legitimate Purpose, and Proportionality; they protect Student Education Records.",
+        "Network, Host, and Application safeguards; they protect Cardholder Data."
+      ],
+      answer: 0,
+      rationale: "HIPAA protects Protected Health Information (PHI) across health plans, providers, and business associates using Administrative, Physical, and Technical safeguards."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "What is the current version of PCI DSS, how many core requirements does it have, and how can an organization reduce its PCI DSS scope?",
+      options: [
+        "Version 4.0.1 (v3.2.1 retired March 31, 2024); 12 requirements; reduce scope by not storing card data (e.g., using a payment gateway that tokenizes).",
+        "Version 3.2.1; 10 requirements; reduce scope by encrypting spreadsheets on local hard drives.",
+        "Version 5.0; 15 requirements; reduce scope by signing a waiver with the Federal Trade Commission.",
+        "Version 2.0; 8 requirements; reduce scope by accepting only debit cards instead of credit cards."
+      ],
+      answer: 0,
+      rationale: "PCI DSS v4.0.1 is current (v3.2.1 retired March 31, 2024), contains 12 requirements, and its scope can be reduced by avoiding card data storage through payment gateways that tokenize transactions."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "Under RA 10173 (Data Privacy Act of 2012), which agency enforces the law and what is the general breach notification timeline?",
+      options: [
+        "National Privacy Commission (NPC); breach notification generally within 72 hours of knowledge.",
+        "Department of Information and Communications Technology (DICT); within 30 days of annual audit.",
+        "Federal Trade Commission (FTC); within 24 hours of system failure.",
+        "Cybersecurity and Infrastructure Security Agency (CISA); within 7 business days."
+      ],
+      answer: 0,
+      rationale: "RA 10173 is enforced by the National Privacy Commission (NPC) in the Philippines and generally requires personal data breach notification within 72 hours of knowledge."
+    },
+    {
+      topic: "Ethics & Compliance",
+      q: "Which Philippine law defines cybercrime offenses such as illegal access, illegal interception, and data interference?",
+      options: [
+        "RA 10175 (Cybercrime Prevention Act of 2012)",
+        "RA 10173 (Data Privacy Act of 2012)",
+        "RA 8792 (Electronic Commerce Act)",
+        "RA 10174 (People's Survival Fund Act)"
+      ],
+      answer: 0,
+      rationale: "RA 10175 is the Cybercrime Prevention Act of 2012, which defines and penalizes cybercrime offenses including illegal access, illegal interception, and data interference."
+    },
+
+    // FISMA, NIST & FRAMEWORKS
+    {
+      topic: "FISMA & Frameworks",
+      q: "Which workforce framework replaced DoD 8570.01-M in February 2023, and how did it change qualification requirements?",
+      options: [
+        "DoD Manual 8140.03; it ties qualification requirements to specific work roles in the DoD Cyber Workforce Framework instead of relying only on certifications.",
+        "NIST SP 800-181; it eliminated all cybersecurity certifications for defense contractors.",
+        "NIST SP 800-53; it mandated that all federal employees obtain a CISSP within 6 months.",
+        "DoD Directive 8000.01; it replaced technical skills with annual awareness posters."
+      ],
+      answer: 0,
+      rationale: "DoD Manual 8140.03 (signed February 2023) replaced DoD 8570.01-M and ties qualification requirements directly to work roles in the DoD Cyber Workforce Framework rather than certifications alone."
+    },
+    {
+      topic: "FISMA & Frameworks",
+      q: "What is the purpose of the NICE Workforce Framework (NIST SP 800-181)?",
+      options: [
+        "Provides a common language for cybersecurity work roles, tasks, knowledge, and skills—useful for job descriptions and career planning.",
+        "Establishes technical encryption standards for payment card processors.",
+        "Defines criminal penalties for unauthorized penetration testing in the Philippines.",
+        "Sets annual maintenance fees and CPE credit rules for ISC2 credentials."
+      ],
+      answer: 0,
+      rationale: "The NICE Workforce Framework (NIST SP 800-181) establishes a common taxonomy for cybersecurity work roles, tasks, knowledge, and skills to aid job descriptions and career planning."
+    },
+    {
+      topic: "FISMA & Frameworks",
+      q: "When was FISMA passed and modernized, and who does it apply to?",
+      options: [
+        "Passed in 2002 and modernized in 2014; applies to U.S. federal agencies and the contractors that run systems for them.",
+        "Passed in 1996 and modernized in 2020; applies to hospitals, health plans, and medical clinics.",
+        "Passed in 2002 and modernized in 2012; applies exclusively to publicly traded corporations.",
+        "Passed in 2012 and modernized in 2024; applies to Philippine startups collecting customer emails."
+      ],
+      answer: 0,
+      rationale: "FISMA was passed in 2002 and modernized in 2014. It governs U.S. federal agencies and contractors operating systems on their behalf."
+    },
+    {
+      topic: "FISMA & Frameworks",
+      q: "Under FISMA governance, what are the specific roles of OMB, DHS/CISA, NIST, and Inspectors General?",
+      options: [
+        "OMB sets policy; DHS/CISA helps operate it; NIST publishes standards (e.g., RMF SP 800-37, controls SP 800-53); Inspectors General independently review agencies.",
+        "NIST sets policy; OMB writes code; Inspectors General operate firewalls; DHS/CISA issues college degrees.",
+        "DHS/CISA audits public companies; OMB enforces HIPAA; NIST prosecutes cybercriminals; Inspectors General issue credit cards.",
+        "OMB publishes SP 800-53; NIST reports to Congress; DHS/CISA manages student grades; Inspectors General run CTFs."
+      ],
+      answer: 0,
+      rationale: "In FISMA: OMB sets policy, DHS/CISA helps operate it, NIST publishes standards (RMF SP 800-37 and security controls SP 800-53), Inspectors General perform independent reviews, and agencies report yearly to OMB and Congress."
+    },
+    {
+      topic: "FISMA & Frameworks",
+      q: "What were the three key security lessons learned from the 2015 OPM (Office of Personnel Management) breach where millions of employee records were stolen?",
+      options: [
+        "Keep a complete system inventory, use strong authentication, and patch on time.",
+        "Tokenize credit cards, install content filters, and sign FERPA waivers.",
+        "Outsource all IT to third-party contractors, disable audit logs, and rely on verbal permissions.",
+        "Publish internal network diagrams, skip annual FISMA reviews, and store plaintext backups."
+      ],
+      answer: 0,
+      rationale: "The 2015 OPM breach highlighted three foundational lessons: maintain a complete system inventory, enforce strong authentication, and apply patches on time."
+    },
+    {
+      topic: "FISMA & Frameworks",
+      q: "What should controls in a compliance and security program be based on?",
+      options: [
+        "Risk and obligations, not on the absence of past incidents.",
+        "Only whether the organization was breached during the previous calendar year.",
+        "The cheapest available software regardless of data sensitivity.",
+        "Passing a single assessment to cover all distinct regulatory frameworks."
+      ],
+      answer: 0,
+      rationale: "Security controls must be driven by actual risk and legal/contractual obligations, never by the absence of past incidents. Different data types also fall under different rules simultaneously."
+    }
+  ];
+
+  // 47 Acronyms
+  const acronymData = [
+    { acr: "ISC2", mean: "International Information System Security Certification Consortium", cat: "Certifications & Orgs" },
+    { acr: "CC", mean: "Certified in Cybersecurity (ISC2)", cat: "Certifications & Orgs" },
+    { acr: "CISSP", mean: "Certified Information Systems Security Professional", cat: "Certifications & Orgs" },
+    { acr: "SSCP", mean: "Systems Security Certified Practitioner", cat: "Certifications & Orgs" },
+    { acr: "CCSP", mean: "Certified Cloud Security Professional", cat: "Certifications & Orgs" },
+    { acr: "CSSLP", mean: "Certified Secure Software Lifecycle Professional", cat: "Certifications & Orgs" },
+    { acr: "CISA", mean: "Certified Information Systems Auditor (ISACA); in Week 14 also Cybersecurity and Infrastructure Security Agency", cat: "Certifications & Orgs" },
+    { acr: "CISM", mean: "Certified Information Security Manager", cat: "Certifications & Orgs" },
+    { acr: "ISACA", mean: "Information Systems Audit and Control Association", cat: "Certifications & Orgs" },
+    { acr: "CEH", mean: "Certified Ethical Hacker", cat: "Certifications & Orgs" },
+    { acr: "EC-Council", mean: "International Council of E-Commerce Consultants", cat: "Certifications & Orgs" },
+    { acr: "CompTIA", mean: "Computing Technology Industry Association", cat: "Certifications & Orgs" },
+    { acr: "GIAC", mean: "Global Information Assurance Certification", cat: "Certifications & Orgs" },
+    { acr: "SANS", mean: "SysAdmin, Audit, Network, and Security (institute)", cat: "Certifications & Orgs" },
+    { acr: "CPE", mean: "Continuing Professional Education", cat: "Certifications & Orgs" },
+    { acr: "NSE", mean: "Network Security Expert (Fortinet program)", cat: "Certifications & Orgs" },
+    { acr: "NIST", mean: "National Institute of Standards and Technology", cat: "Frameworks & Agencies" },
+    { acr: "SP", mean: "Special Publication (e.g., SP 800-50, SP 800-181)", cat: "Frameworks & Agencies" },
+    { acr: "NICE", mean: "National Initiative for Cybersecurity Education (NICE Workforce Framework)", cat: "Frameworks & Agencies" },
+    { acr: "DoD", mean: "Department of Defense", cat: "Frameworks & Agencies" },
+    { acr: "DoDM / DoDD", mean: "DoD Manual / DoD Directive", cat: "Frameworks & Agencies" },
+    { acr: "NCAE-C", mean: "National Centers of Academic Excellence in Cybersecurity", cat: "Frameworks & Agencies" },
+    { acr: "NSA", mean: "National Security Agency", cat: "Frameworks & Agencies" },
+    { acr: "AWS", mean: "Amazon Web Services", cat: "Frameworks & Agencies" },
+    { acr: "OWASP", mean: "Open Worldwide Application Security Project", cat: "Frameworks & Agencies" },
+    { acr: "CTF", mean: "Capture the Flag", cat: "Frameworks & Agencies" },
+    { acr: "BSIT", mean: "Bachelor of Science in Information Technology", cat: "Frameworks & Agencies" },
+    { acr: "PBA", mean: "Performance-Based Assessment", cat: "Frameworks & Agencies" },
+    { acr: "OMB", mean: "Office of Management and Budget", cat: "Frameworks & Agencies" },
+    { acr: "OPM", mean: "Office of Personnel Management", cat: "Frameworks & Agencies" },
+    { acr: "DHS", mean: "Department of Homeland Security", cat: "Frameworks & Agencies" },
+    { acr: "RMF", mean: "Risk Management Framework (NIST SP 800-37)", cat: "Frameworks & Agencies" },
+    { acr: "FTC", mean: "Federal Trade Commission", cat: "Frameworks & Agencies" },
+    { acr: "PCAOB", mean: "Public Company Accounting Oversight Board", cat: "Frameworks & Agencies" },
+    { acr: "NPC", mean: "National Privacy Commission (Philippines)", cat: "Frameworks & Agencies" },
+    { acr: "ACM / IEEE", mean: "Association for Computing Machinery / Institute of Electrical and Electronics Engineers", cat: "Frameworks & Agencies" },
+    { acr: "IT", mean: "Information Technology", cat: "Frameworks & Agencies" },
+    { acr: "FISMA", mean: "Federal Information Security Modernization Act", cat: "Laws & Compliance" },
+    { acr: "HIPAA", mean: "Health Insurance Portability and Accountability Act", cat: "Laws & Compliance" },
+    { acr: "PHI", mean: "Protected Health Information", cat: "Laws & Compliance" },
+    { acr: "GLBA", mean: "Gramm-Leach-Bliley Act", cat: "Laws & Compliance" },
+    { acr: "NPI", mean: "Nonpublic Personal Information", cat: "Laws & Compliance" },
+    { acr: "SOX", mean: "Sarbanes-Oxley Act", cat: "Laws & Compliance" },
+    { acr: "FERPA", mean: "Family Educational Rights and Privacy Act", cat: "Laws & Compliance" },
+    { acr: "CIPA", mean: "Children's Internet Protection Act", cat: "Laws & Compliance" },
+    { acr: "PCI DSS", mean: "Payment Card Industry Data Security Standard", cat: "Laws & Compliance" },
+    { acr: "RA", mean: "Republic Act (RA 10173 Data Privacy Act; RA 10175 Cybercrime Prevention Act)", cat: "Laws & Compliance" }
+  ];
+
+  // Utility: Shuffle Array
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Render Practice Scenarios Flashcards
+  function renderScenarios() {
+    const container = document.getElementById('scenarios-container');
+    container.innerHTML = '';
+    scenariosData.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'scenario-card';
+      card.innerHTML = `
+        <span class="scenario-num">Scenario #${item.id}</span>
+        <div class="scenario-q">${item.q}</div>
+        <button class="reveal-btn" onclick="toggleAnswer(${item.id})">
+          <span id="btn-text-${item.id}">👁️ Show Answer</span>
+        </button>
+        <div class="scenario-answer hidden" id="answer-${item.id}">
+          ${item.answer}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function toggleAnswer(id) {
+    const ansBox = document.getElementById(`answer-${id}`);
+    const btnText = document.getElementById(`btn-text-${id}`);
+    if (ansBox.classList.contains('hidden')) {
+      ansBox.classList.remove('hidden');
+      btnText.textContent = '🙈 Hide Answer';
+    } else {
+      ansBox.classList.add('hidden');
+      btnText.textContent = '👁️ Show Answer';
+    }
+  }
+
+  let allAnswersShown = false;
+  function toggleAllAnswers() {
+    allAnswersShown = !allAnswersShown;
+    scenariosData.forEach(item => {
+      const ansBox = document.getElementById(`answer-${item.id}`);
+      const btnText = document.getElementById(`btn-text-${item.id}`);
+      if (allAnswersShown) {
+        ansBox.classList.remove('hidden');
+        btnText.textContent = '🙈 Hide Answer';
+      } else {
+        ansBox.classList.add('hidden');
+        btnText.textContent = '👁️ Show Answer';
+      }
+    });
+  }
+
+  // Tab Navigation
+  function switchTab(tab) {
+    const tabNames = ['notes', 'scenarios', 'mcq', 'acronym', 'list'];
+    document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+      if (tabNames[index] === tab) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
+    tabNames.forEach(name => {
+      const el = document.getElementById(`section-${name}`);
+      if (name === tab) {
+        el.classList.remove('hidden');
+      } else {
+        el.classList.add('hidden');
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ---------------- MULTIPLE CHOICE LOGIC ----------------
+  let currentMcqList = [];
+  let mcqIndex = 0;
+  let mcqScore = 0;
+
+  function resetMcq() {
+    const topic = document.getElementById('mcq-topic').value;
+    const filtered = topic === 'all' ? mcqData : mcqData.filter(item => item.topic === topic);
+    currentMcqList = shuffle(filtered);
+    mcqIndex = 0;
+    mcqScore = 0;
+    document.getElementById('mcq-quiz-area').classList.remove('hidden');
+    document.getElementById('mcq-result-area').classList.add('hidden');
+    updateMcqScore();
+    renderMcq();
+  }
+
+  function updateMcqScore() {
+    document.getElementById('mcq-score').textContent = `Score: ${mcqScore} / ${mcqIndex}`;
+  }
+
+  function renderMcq() {
+    const item = currentMcqList[mcqIndex];
+    document.getElementById('mcq-progress').textContent = `Question ${mcqIndex + 1} of ${currentMcqList.length} (${item.topic})`;
+    document.getElementById('mcq-question').textContent = item.q;
+    document.getElementById('mcq-rationale').classList.add('hidden');
+    document.getElementById('mcq-next-btn').classList.add('hidden');
+
+    const optionsContainer = document.getElementById('mcq-options');
+    optionsContainer.innerHTML = '';
+
+    const mappedOptions = item.options.map((text, idx) => ({
+      text,
+      isCorrect: idx === item.answer
+    }));
+    const shuffledOptions = shuffle(mappedOptions);
+
+    shuffledOptions.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = opt.text;
+      btn.onclick = () => selectMcqOption(btn, opt.isCorrect, shuffledOptions, item.rationale);
+      optionsContainer.appendChild(btn);
+    });
+  }
+
+  function selectMcqOption(selectedBtn, isCorrect, allOptions, rationaleText) {
+    const buttons = document.querySelectorAll('#mcq-options .option-btn');
+    buttons.forEach((btn, i) => {
+      btn.disabled = true;
+      if (allOptions[i].isCorrect) {
+        btn.classList.add('correct');
+      }
+    });
+
+    if (isCorrect) {
+      mcqScore++;
+    } else {
+      selectedBtn.classList.add('wrong');
+    }
+
+    mcqIndex++;
+    updateMcqScore();
+
+    const rationaleBox = document.getElementById('mcq-rationale');
+    rationaleBox.innerHTML = `<strong>Explanation:</strong> ${rationaleText}`;
+    rationaleBox.classList.remove('hidden');
+
+    const nextBtn = document.getElementById('mcq-next-btn');
+    nextBtn.textContent = mcqIndex < currentMcqList.length ? 'Next Question ➔' : 'See Final Results 🏆';
+    nextBtn.classList.remove('hidden');
+  }
+
+  function nextMcq() {
+    if (mcqIndex < currentMcqList.length) {
+      renderMcq();
+    } else {
+      document.getElementById('mcq-quiz-area').classList.add('hidden');
+      document.getElementById('mcq-result-area').classList.remove('hidden');
+      const pct = Math.round((mcqScore / currentMcqList.length) * 100);
+      document.getElementById('mcq-final-text').textContent = `You scored ${mcqScore} out of ${currentMcqList.length} (${pct}%).`;
+    }
+  }
+
+  // ---------------- ACRONYM QUIZ LOGIC ----------------
+  let currentAcrList = [];
+  let acrIndex = 0;
+  let acrScore = 0;
+
+  function resetAcronymQuiz() {
+    const cat = document.getElementById('acronym-category').value;
+    const filtered = cat === 'all' ? acronymData : acronymData.filter(item => item.cat === cat);
+    currentAcrList = shuffle(filtered);
+    acrIndex = 0;
+    acrScore = 0;
+    document.getElementById('acr-quiz-area').classList.remove('hidden');
+    document.getElementById('acr-result-area').classList.add('hidden');
+    updateAcrScore();
+    renderAcronym();
+  }
+
+  function updateAcrScore() {
+    document.getElementById('acr-score').textContent = `Score: ${acrScore} / ${acrIndex}`;
+  }
+
+  function renderAcronym() {
+    const item = currentAcrList[acrIndex];
+    document.getElementById('acr-progress').textContent = `Acronym ${acrIndex + 1} of ${currentAcrList.length} (${item.cat})`;
+    document.getElementById('acr-question').textContent = `What does "${item.acr}" stand for?`;
+    document.getElementById('acr-rationale').classList.add('hidden');
+    document.getElementById('acr-next-btn').classList.add('hidden');
+
+    const distractors = shuffle(acronymData.filter(x => x.acr !== item.acr)).slice(0, 3);
+    const choices = shuffle([
+      { text: item.mean, isCorrect: true },
+      ...distractors.map(d => ({ text: d.mean, isCorrect: false }))
+    ]);
+
+    const optionsContainer = document.getElementById('acr-options');
+    optionsContainer.innerHTML = '';
+
+    choices.forEach(choice => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = choice.text;
+      btn.onclick = () => selectAcrOption(btn, choice.isCorrect, choices, item);
+      optionsContainer.appendChild(btn);
+    });
+  }
+
+  function selectAcrOption(selectedBtn, isCorrect, allChoices, item) {
+    const buttons = document.querySelectorAll('#acr-options .option-btn');
+    buttons.forEach((btn, i) => {
+      btn.disabled = true;
+      if (allChoices[i].isCorrect) {
+        btn.classList.add('correct');
+      }
+    });
+
+    if (isCorrect) {
+      acrScore++;
+    } else {
+      selectedBtn.classList.add('wrong');
+    }
+
+    acrIndex++;
+    updateAcrScore();
+
+    const rationaleBox = document.getElementById('acr-rationale');
+    rationaleBox.innerHTML = `<strong>${item.acr}:</strong> ${item.mean}`;
+    rationaleBox.classList.remove('hidden');
+
+    const nextBtn = document.getElementById('acr-next-btn');
+    nextBtn.textContent = acrIndex < currentAcrList.length ? 'Next Acronym ➔' : 'See Final Results 🏆';
+    nextBtn.classList.remove('hidden');
+  }
+
+  function nextAcronym() {
+    if (acrIndex < currentAcrList.length) {
+      renderAcronym();
+    } else {
+      document.getElementById('acr-quiz-area').classList.add('hidden');
+      document.getElementById('acr-result-area').classList.remove('hidden');
+      const pct = Math.round((acrScore / currentAcrList.length) * 100);
+      document.getElementById('acr-final-text').textContent = `You scored ${acrScore} out of ${currentAcrList.length} (${pct}%).`;
+    }
+  }
+
+  // ---------------- REFERENCE TABLE LOGIC ----------------
+  function renderTable(data) {
+    const tbody = document.getElementById('acronym-table-body');
+    tbody.innerHTML = '';
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${row.acr}</strong></td>
+        <td>${row.mean}</td>
+        <td><span style="font-size:0.8rem; background:var(--surface-alt); padding:3px 8px; border-radius:12px; border:1px solid var(--border);">${row.cat}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('table-count').textContent = `Showing ${data.length} items`;
+  }
+
+  function filterTable() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    const filtered = acronymData.filter(item =>
+      item.acr.toLowerCase().includes(query) ||
+      item.mean.toLowerCase().includes(query) ||
+      item.cat.toLowerCase().includes(query)
+    );
+    renderTable(filtered);
+  }
+
+  // Theme Toggle with LocalStorage
+  function toggleTheme() {
+    const isDark = document.body.getAttribute('data-theme') === 'dark';
+    const nextTheme = isDark ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', nextTheme);
+    document.getElementById('theme-btn').textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+    localStorage.setItem('reviewer_theme', nextTheme);
+  }
+
+  // Font Size Adjuster
+  let currentFontSize = 16;
+  function adjustFontSize(delta) {
+    currentFontSize = Math.max(13, Math.min(22, currentFontSize + delta));
+    document.body.style.fontSize = currentFontSize + 'px';
+  }
+
+  // Initial Load
+  const savedTheme = localStorage.getItem('reviewer_theme');
+  if (savedTheme) {
+    document.body.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+  }
+
+  renderScenarios();
+  resetMcq();
+  resetAcronymQuiz();
+  renderTable(acronymData);
+</script>
+
+</body>
+</html>
