@@ -3,35 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="theme-color" content="#1e3a8a">
+  <meta name="theme-color" content="#4f46e5">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>ITEP 413: IAS 2 Finals Reviewer | Mobile App</title>
+  <title>ITEP 413: IAS 2 Finals Reviewer</title>
   <style>
     :root {
       --bg: #f8fafc;
       --surface: #ffffff;
       --surface-alt: #f1f5f9;
-      --surface-border: #e2e8f0;
-      --primary: #1e3a8a;
-      --primary-hover: #1d4ed8;
-      --primary-light: #eff6ff;
-      --primary-border: #bfdbfe;
+      --surface-glass: rgba(255, 255, 255, 0.88);
+      --border: #e2e8f0;
+      --border-focus: #6366f1;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+      --accent: #06b6d4;
       --text: #0f172a;
       --text-muted: #64748b;
-      --border: #e2e8f0;
       --correct-bg: #ecfdf5;
       --correct-border: #10b981;
       --correct-text: #065f46;
       --wrong-bg: #fef2f2;
       --wrong-border: #ef4444;
       --wrong-text: #991b1b;
-      --badge-bg: #e0e7ff;
-      --badge-text: #3730a3;
-      --nav-bg: rgba(255, 255, 255, 0.95);
-      --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      --card-radius: 14px;
+      --badge-bg: #eef2ff;
+      --badge-text: #4338ca;
+      --dock-bg: rgba(255, 255, 255, 0.9);
+      --dock-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
       --safe-bottom: env(safe-area-inset-bottom, 12px);
     }
 
@@ -39,31 +44,33 @@
       --bg: #090d16;
       --surface: #111827;
       --surface-alt: #1a2234;
-      --surface-border: #334155;
-      --primary: #3b82f6;
-      --primary-hover: #60a5fa;
-      --primary-light: #172554;
-      --primary-border: #1e3a8a;
+      --surface-glass: rgba(17, 24, 39, 0.88);
+      --border: #242f48;
+      --border-focus: #818cf8;
+      --primary: #6366f1;
+      --primary-hover: #818cf8;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #38bdf8 100%);
+      --accent: #38bdf8;
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --border: #26334d;
       --correct-bg: #064e3b;
       --correct-border: #10b981;
       --correct-text: #a7f3d0;
       --wrong-bg: #7f1d1d;
       --wrong-border: #ef4444;
       --wrong-text: #fecaca;
-      --badge-bg: #2e1065;
-      --badge-text: #ddd6fe;
-      --nav-bg: rgba(17, 24, 39, 0.95);
-      --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      --badge-bg: #1e1b4b;
+      --badge-text: #c7d2fe;
+      --dock-bg: rgba(17, 24, 39, 0.92);
+      --dock-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Plus Jakarta Sans", sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -74,122 +81,146 @@
       color: var(--text);
       line-height: 1.55;
       font-size: 16px;
-      transition: background-color 0.2s, color 0.2s;
+      transition: background-color 0.25s, color 0.25s;
     }
 
     body {
-      padding: 10px 12px 90px 12px;
-      max-width: 900px;
+      padding: 12px 12px 105px 12px;
+      max-width: 860px;
       margin: 0 auto;
     }
 
-    /* Top App Header */
-    .app-header {
-      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    /* Modern App Hero Header */
+    .app-hero {
+      background: var(--primary-gradient);
       color: #ffffff;
-      padding: 16px 14px;
-      border-radius: var(--card-radius);
+      padding: 18px 16px;
+      border-radius: var(--radius-lg);
       margin-bottom: 12px;
-      box-shadow: var(--card-shadow);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.25);
       position: relative;
+      overflow: hidden;
     }
 
-    [data-theme="dark"] .app-header {
-      background: linear-gradient(135deg, #1e293b 0%, #0b1120 100%);
-      border: 1px solid var(--border);
+    .app-hero::after {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .header-institution {
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .hero-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-weight: 700;
-      opacity: 0.85;
-      margin-bottom: 2px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(8px);
     }
 
-    .header-title {
-      font-size: 1.25rem;
+    .hero-offline {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.25);
+      color: #a7f3d0;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+    }
+
+    .hero-title {
+      font-size: 1.35rem;
       font-weight: 800;
       line-height: 1.25;
       margin-bottom: 4px;
     }
 
-    .header-desc {
-      font-size: 0.82rem;
-      opacity: 0.9;
+    .hero-desc {
+      font-size: 0.85rem;
+      opacity: 0.92;
     }
 
-    /* Utility Toolbar */
-    .toolbar {
+    /* Action Strip */
+    .action-strip {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 8px;
       margin-bottom: 12px;
-      overflow-x: auto;
-      padding-bottom: 2px;
     }
 
-    .tool-btn {
+    .pill-action {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
       padding: 7px 12px;
-      border-radius: 20px;
+      border-radius: var(--radius-full);
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      white-space: nowrap;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      transition: transform 0.1s, background 0.15s;
+      gap: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform 0.15s, background 0.15s;
     }
 
-    .tool-btn:active {
-      transform: scale(0.96);
+    .pill-action:active {
+      transform: scale(0.95);
     }
 
-    /* Sub-nav Pill Filter for Notes */
-    .pills-scroll {
+    /* Topic Pill Navigation */
+    .topic-pills-bar {
       display: flex;
       gap: 6px;
       overflow-x: auto;
-      padding: 2px 2px 8px 2px;
-      margin-bottom: 10px;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
       scrollbar-width: none;
     }
 
-    .pills-scroll::-webkit-scrollbar {
+    .topic-pills-bar::-webkit-scrollbar {
       display: none;
     }
 
-    .pill-btn {
+    .t-pill {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 18px;
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 700;
       white-space: nowrap;
       cursor: pointer;
       flex-shrink: 0;
+      transition: all 0.2s;
     }
 
-    .pill-btn.active {
+    .t-pill.active {
       background: var(--primary);
       color: #ffffff;
       border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
     }
 
-    /* Main Container Cards */
-    .card {
+    /* Card Panels */
+    .card-panel {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--card-radius);
+      border-radius: var(--radius-lg);
       padding: 16px 14px;
       box-shadow: var(--card-shadow);
       margin-bottom: 14px;
@@ -199,27 +230,31 @@
       display: none !important;
     }
 
-    /* Fixed Android Bottom Navigation Bar */
-    .bottom-nav {
+    /* Modern Floating Dock Bottom Nav */
+    .dock-container {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--nav-bg);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border);
+      bottom: calc(10px + var(--safe-bottom));
+      left: 12px;
+      right: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+      z-index: 999;
+    }
+
+    .dock {
+      background: var(--dock-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 6px 8px calc(6px + var(--safe-bottom)) 8px;
-      z-index: 999;
-      box-shadow: 0 -3px 12px rgba(0,0,0,0.08);
-      max-width: 900px;
-      margin: 0 auto;
+      padding: 6px 10px;
+      box-shadow: var(--dock-shadow);
     }
 
-    .nav-item {
+    .dock-btn {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -229,86 +264,90 @@
       border: none;
       color: var(--text-muted);
       cursor: pointer;
-      padding: 4px 2px;
-      border-radius: 8px;
-      transition: color 0.15s, transform 0.1s;
+      padding: 6px 4px;
+      border-radius: var(--radius-full);
       font-size: 0.72rem;
-      font-weight: 600;
+      font-weight: 700;
       gap: 3px;
+      transition: all 0.2s;
     }
 
-    .nav-item:active {
+    .dock-btn:active {
       transform: scale(0.92);
     }
 
-    .nav-icon {
-      font-size: 1.15rem;
+    .dock-emoji {
+      font-size: 1.25rem;
       line-height: 1;
+      transition: transform 0.2s;
     }
 
-    .nav-item.active {
+    .dock-btn.active {
       color: var(--primary);
-      font-weight: 800;
     }
 
-    .nav-item.active .nav-icon {
-      transform: translateY(-1px);
+    .dock-btn.active .dock-emoji {
+      transform: scale(1.15) translateY(-2px);
     }
 
-    /* Study Notes Layout */
-    .note-topic {
-      margin-bottom: 22px;
-      padding-bottom: 18px;
+    /* Note Sections */
+    .study-topic {
+      margin-bottom: 24px;
+      padding-bottom: 20px;
       border-bottom: 1px solid var(--border);
     }
 
-    .note-topic:last-child {
+    .study-topic:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
 
-    .topic-header {
-      font-size: 1.15rem;
+    .study-topic-header {
+      font-size: 1.18rem;
       font-weight: 800;
       color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modern-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
       margin-bottom: 10px;
+      transition: border-color 0.15s;
+    }
+
+    .modern-card h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .info-card {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 10px;
+    .modern-card p, .modern-card li {
+      font-size: 0.91rem;
+      line-height: 1.55;
     }
 
-    .info-card h4 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      color: var(--text);
-    }
-
-    .info-card p, .info-card li {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .callout-box {
-      background: var(--primary-light);
+    .pro-tip {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
       border-left: 4px solid var(--primary);
-      padding: 10px 12px;
-      border-radius: 6px;
-      margin: 10px 0;
-      font-size: 0.88rem;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      margin: 12px 0;
+      font-size: 0.9rem;
       font-weight: 600;
     }
 
-    /* Mobile Responsive Comparison Block */
-    .comparison-grid {
+    /* Grid comparisons */
+    .duo-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
@@ -316,31 +355,34 @@
     }
 
     @media (min-width: 600px) {
-      .comparison-grid {
+      .duo-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    .comp-box {
+    .duo-box {
       background: var(--surface-alt);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
     }
 
-    .comp-title {
-      font-size: 0.92rem;
+    .duo-title {
+      font-size: 0.95rem;
       font-weight: 800;
       color: var(--primary);
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    /* Tables on Mobile */
-    .table-container {
+    /* Responsive Tables */
+    .table-responsive {
       width: 100%;
       overflow-x: auto;
-      margin: 10px 0;
-      border-radius: 8px;
+      margin: 12px 0;
+      border-radius: var(--radius-md);
       border: 1px solid var(--border);
       -webkit-overflow-scrolling: touch;
     }
@@ -348,12 +390,12 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 480px;
+      min-width: 490px;
       font-size: 0.88rem;
     }
 
     th, td {
-      padding: 10px 12px;
+      padding: 11px 13px;
       text-align: left;
       border-bottom: 1px solid var(--border);
     }
@@ -364,110 +406,111 @@
       color: var(--primary);
     }
 
-    /* Practice Scenarios (Top 10) */
-    .flashcard {
+    /* Top 10 Practice Cards */
+    .qa-card {
       background: var(--surface-alt);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: var(--radius-md);
+      padding: 16px 14px;
       margin-bottom: 12px;
-      transition: border-color 0.15s;
+      transition: all 0.2s;
     }
 
-    .card-meta {
+    .qa-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
     }
 
-    .badge-scenario {
+    .qa-chip {
       background: var(--primary);
       color: #ffffff;
       font-size: 0.72rem;
       font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 10px;
-      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.05em;
     }
 
-    .btn-copy {
+    .qa-copy {
       background: transparent;
       border: none;
       color: var(--text-muted);
       cursor: pointer;
       font-size: 0.82rem;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 4px;
       padding: 2px 6px;
     }
 
-    .scenario-text {
-      font-size: 1rem;
+    .qa-question {
+      font-size: 1.02rem;
       font-weight: 700;
-      line-height: 1.4;
-      margin-bottom: 10px;
+      line-height: 1.45;
+      margin-bottom: 12px;
     }
 
-    .btn-reveal {
+    .qa-reveal-btn {
       width: 100%;
       background: var(--surface);
       border: 1.5px solid var(--primary);
       color: var(--primary);
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      padding: 11px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      min-height: 44px;
+      min-height: 46px;
       transition: all 0.15s;
     }
 
-    .btn-reveal:active {
+    .qa-reveal-btn:active {
       transform: scale(0.98);
-      background: var(--primary-light);
+      background: var(--badge-bg);
     }
 
-    .answer-panel {
+    .qa-answer {
       background: var(--surface);
       border-left: 4px solid var(--primary);
       padding: 12px 14px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       margin-top: 10px;
       font-size: 0.92rem;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* MCQ Quiz Styling */
-    .quiz-progress-bar {
+    /* MCQ Quiz Component */
+    .progress-track {
       width: 100%;
       height: 6px;
       background: var(--surface-alt);
-      border-radius: 4px;
+      border-radius: var(--radius-full);
       margin-bottom: 14px;
       overflow: hidden;
     }
 
-    .quiz-progress-fill {
+    .progress-bar {
       height: 100%;
-      background: var(--primary);
+      background: var(--primary-gradient);
       width: 0%;
-      transition: width 0.25s ease;
+      transition: width 0.3s ease;
     }
 
-    .quiz-top {
+    .quiz-stats {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
 
-    .quiz-badge {
+    .quiz-topic-badge {
       font-size: 0.75rem;
       font-weight: 700;
       color: var(--text-muted);
@@ -475,35 +518,35 @@
       letter-spacing: 0.05em;
     }
 
-    .quiz-score {
+    .quiz-score-pill {
       font-size: 0.88rem;
       font-weight: 800;
       background: var(--badge-bg);
       color: var(--badge-text);
-      padding: 3px 10px;
-      border-radius: 14px;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
     }
 
-    .quiz-question {
-      font-size: 1.05rem;
+    .quiz-question-box {
+      font-size: 1.08rem;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.45;
       margin-bottom: 16px;
     }
 
-    .options-list {
+    .choices-column {
       display: flex;
       flex-direction: column;
       gap: 10px;
       margin-bottom: 14px;
     }
 
-    .opt-btn {
+    .choice-card {
       text-align: left;
-      padding: 12px 14px;
+      padding: 13px 14px;
       background: var(--surface-alt);
       border: 1.5px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       font-size: 0.94rem;
       color: var(--text);
       cursor: pointer;
@@ -515,227 +558,269 @@
       transition: all 0.15s;
     }
 
-    .opt-btn:hover:not(:disabled) {
+    .choice-card:hover:not(:disabled) {
       border-color: var(--primary);
-      background: var(--primary-light);
     }
 
-    .opt-btn:active:not(:disabled) {
+    .choice-card:active:not(:disabled) {
       transform: scale(0.98);
     }
 
-    .opt-btn.correct {
+    .choice-card.correct {
       background: var(--correct-bg) !important;
       border-color: var(--correct-border) !important;
       color: var(--correct-text) !important;
       font-weight: 700;
     }
 
-    .opt-btn.wrong {
+    .choice-card.wrong {
       background: var(--wrong-bg) !important;
       border-color: var(--wrong-border) !important;
       color: var(--wrong-text) !important;
     }
 
-    .explanation-box {
+    .quiz-expl {
       background: var(--surface-alt);
       border-left: 4px solid var(--primary);
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       padding: 12px 14px;
       font-size: 0.9rem;
       line-height: 1.5;
       margin-bottom: 14px;
     }
 
-    .btn-action {
+    .btn-gradient {
       width: 100%;
-      background: var(--primary);
+      background: var(--primary-gradient);
       color: #ffffff;
       border: none;
       padding: 13px;
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       font-size: 0.96rem;
       font-weight: 800;
       cursor: pointer;
       min-height: 48px;
-      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+      transition: transform 0.15s, opacity 0.15s;
     }
 
-    .btn-action:active {
+    .btn-gradient:active {
       transform: scale(0.98);
     }
 
-    /* Acronym List (Mobile Cards) */
-    .search-bar-wrap {
+    /* Acronym Explorer */
+    .filter-chips {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
       margin-bottom: 12px;
-      position: relative;
+      scrollbar-width: none;
     }
 
-    .search-input {
+    .filter-chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chip-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .search-glow-wrap {
+      margin-bottom: 12px;
+    }
+
+    .search-input-field {
       width: 100%;
       padding: 12px 14px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       font-size: 0.95rem;
       background: var(--surface);
       color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .acronym-card-item {
+    .search-input-field:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    .acr-item-card {
       background: var(--surface-alt);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: var(--radius-md);
       padding: 12px 14px;
       margin-bottom: 8px;
+      transition: transform 0.15s;
     }
 
-    .acr-top {
+    .acr-card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 4px;
     }
 
-    .acr-tag {
-      font-size: 1.05rem;
+    .acr-code {
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--primary);
     }
 
-    .acr-category {
+    .acr-cat-tag {
       font-size: 0.72rem;
       background: var(--surface);
       padding: 2px 8px;
-      border-radius: 10px;
+      border-radius: var(--radius-full);
       border: 1px solid var(--border);
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    .acr-meaning {
+    .acr-definition {
       font-size: 0.92rem;
       color: var(--text);
       line-height: 1.4;
     }
 
-    /* Toast Notification */
-    .toast {
+    /* Toast */
+    .toast-pill {
       position: fixed;
-      bottom: 80px;
+      bottom: 90px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       color: #ffffff;
-      padding: 8px 18px;
-      border-radius: 20px;
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       z-index: 1000;
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.25s, transform 0.25s;
       pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
     }
 
-    .toast.show {
+    .toast-pill.show {
       opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
     }
   </style>
 </head>
 <body>
 
-  <!-- App Header -->
-  <header class="app-header">
-    <div class="header-institution">Republic of the Philippines • LSPU • CCS</div>
-    <div class="header-title">ITEP 413: IAS 2 Finals Reviewer</div>
-    <div class="header-desc">Complete Study Guide, Top 10 Practice Q&amp;A, 32 MCQs &amp; 47 Acronyms</div>
+  <!-- App Hero Header -->
+  <header class="app-hero">
+    <div class="hero-meta">
+      <span class="hero-tag">✨ LSPU CCS • IAS 2</span>
+      <span class="hero-offline">⚡ 100% Offline Ready</span>
+    </div>
+    <div class="hero-title">ITEP 413: Finals Study Hub</div>
+    <div class="hero-desc">Interactive Study Notes, Top 10 Flashcards, 32 MCQs &amp; 47 Acronyms</div>
   </header>
 
-  <!-- Top Utilities -->
-  <div class="toolbar">
-    <button class="tool-btn" onclick="toggleTheme()" id="theme-btn">🌙 Dark Mode</button>
-    <button class="tool-btn" onclick="adjustTextSize(1)">A+ Larger</button>
-    <button class="tool-btn" onclick="adjustTextSize(-1)">A- Smaller</button>
-    <a href="https://github.com/03DxD12/Finals-413---1st-Sem" target="_blank" class="tool-btn" style="text-decoration:none; color:inherit;">
+  <!-- Action Strip -->
+  <div class="action-strip">
+    <button class="pill-action" onclick="toggleTheme()" id="theme-toggle-btn">🌙 Dark Mode</button>
+    <button class="pill-action" onclick="adjustTextSize(1)">A+ Text</button>
+    <button class="pill-action" onclick="adjustTextSize(-1)">A- Text</button>
+    <a href="https://github.com/03DxD12/Finals-413---1st-Sem" target="_blank" class="pill-action" style="text-decoration:none; color:inherit;">
       ⭐ GitHub
     </a>
   </div>
 
-  <!-- TAB 1: STUDY NOTES -->
-  <main id="tab-notes" class="card">
-    <!-- Topic Jump Pills -->
-    <div class="pills-scroll">
-      <button class="pill-btn active" onclick="scrollToTopic('topic-edu')">Education &amp; Training</button>
-      <button class="pill-btn" onclick="scrollToTopic('topic-ethics')">Ethics &amp; Canons</button>
-      <button class="pill-btn" onclick="scrollToTopic('topic-compliance')">Compliance Laws</button>
-      <button class="pill-btn" onclick="scrollToTopic('topic-fisma')">FISMA &amp; OPM</button>
-      <button class="pill-btn" onclick="scrollToTopic('topic-ph')">Philippine Laws</button>
+  <!-- TAB 1: STUDY HUB -->
+  <main id="tab-notes" class="card-panel">
+    <!-- Topic Navigation Pills -->
+    <div class="topic-pills-bar">
+      <button class="t-pill active" onclick="jumpToTopic('topic-edu')">🎓 Education &amp; Certs</button>
+      <button class="t-pill" onclick="jumpToTopic('topic-ethics')">⚖️ Ethics &amp; Canons</button>
+      <button class="t-pill" onclick="jumpToTopic('topic-compliance')">📜 Compliance Matrix</button>
+      <button class="t-pill" onclick="jumpToTopic('topic-fisma')">🏛️ FISMA &amp; OPM</button>
+      <button class="t-pill" onclick="jumpToTopic('topic-ph')">🇵🇭 Philippine Laws</button>
     </div>
 
-    <!-- Section: Education & Training -->
-    <section id="topic-edu" class="note-topic">
-      <div class="topic-header">🎓 1. Education, Training &amp; Certifications</div>
+    <!-- Topic 1 -->
+    <section id="topic-edu" class="study-topic">
+      <div class="study-topic-header">🎓 1. Education, Training &amp; Certifications</div>
       
-      <div class="comparison-grid">
-        <div class="comp-box">
-          <div class="comp-title">Awareness</div>
-          <p style="font-size:0.88rem;">Short messages making everyone notice security.<br><em>Example:</em> Staff reminder about phishing texts.</p>
+      <div class="duo-grid">
+        <div class="duo-box">
+          <div class="duo-title">⚡ Awareness</div>
+          <p style="font-size:0.88rem;">Short messages making everyone notice security.<br><em>Example:</em> Warning staff about a new phishing text.</p>
         </div>
-        <div class="comp-box">
-          <div class="comp-title">Training</div>
-          <p style="font-size:0.88rem;">Teaching specific hands-on skills for a job.<br><em>Example:</em> Lab course on restoring server backups.</p>
+        <div class="duo-box">
+          <div class="duo-title">🛠️ Training</div>
+          <p style="font-size:0.88rem;">Hands-on teaching of specific skills for a job.<br><em>Example:</em> Lab course on restoring server backups.</p>
         </div>
       </div>
-      <div class="info-card">
-        <h4>Education</h4>
-        <p>Long-term learning building broad understanding and judgment (e.g., IT/Cybersecurity Degree program).</p>
+      <div class="modern-card">
+        <h4>📚 Education</h4>
+        <p>Long-term learning that builds broad understanding and judgment (e.g., BSIT or Master's degree in Cybersecurity).</p>
       </div>
 
-      <div class="callout-box">
-        💡 <strong>Memory Aid:</strong> Awareness tells you <em>that</em>, Training teaches you <em>how</em>, Education helps you understand <em>why</em>.
+      <div class="pro-tip">
+        💡 <strong>Memory Hack:</strong> Awareness tells you <em>that</em>, Training teaches you <em>how</em>, Education helps you understand <em>why</em>.
       </div>
 
-      <div class="info-card">
-        <h4>NIST SP 800-50 Rev. 1 (2024) Cycle</h4>
-        <p>A continuous cycle: <strong>Plan &rarr; Deliver &rarr; Measure Results &rarr; Improve</strong>.<br>
-        <em>Key Rule:</em> Completing a module is <strong>not proof</strong> that behavior changed!</p>
+      <div class="modern-card">
+        <h4>🔄 NIST SP 800-50 Rev. 1 (2024) Cycle</h4>
+        <p>A continuous learning cycle: <strong>Plan &rarr; Deliver &rarr; Measure Results &rarr; Improve</strong>.<br>
+        <em>Key takeaway:</em> Simply completing a module is <strong>not proof</strong> that user behavior actually changed.</p>
       </div>
 
-      <div class="info-card">
-        <h4>Self-Study &amp; Ethics</h4>
+      <div class="modern-card">
+        <h4>🛡️ Self-Study &amp; Ethics Rules</h4>
         <p>Practice strictly on systems you own or sandboxes (<strong>OWASP Juice Shop, WebGoat, official CTFs</strong>). Unauthorized testing is illegal even with good intentions; verbal permission is never enough.</p>
       </div>
 
-      <div class="info-card">
-        <h4>Certifications &amp; Career Roadmap</h4>
+      <div class="modern-card">
+        <h4>🎖️ Certifications &amp; Career Roadmap</h4>
         <p>• <strong>Vendor-Neutral:</strong> Universal concepts across vendors (CompTIA Security+, ISC2 CISSP/SSCP/CC, ISACA CISA/CISM, GIAC).<br>
-        • <strong>Vendor-Specific:</strong> One vendor's technologies (Fortinet NSE, Cisco, AWS, Microsoft).<br>
+        • <strong>Vendor-Specific:</strong> Specific company products (Fortinet NSE, Cisco, AWS, Microsoft).<br>
         • <strong>Associate of ISC2:</strong> Earned by passing exams before completing the 5-year experience requirement.<br>
         • <strong>Maintenance:</strong> Requires annual Continuing Professional Education (CPE) credits and fees.<br>
         • <strong>Roadmap:</strong> Degree &rarr; Entry vendor-neutral &rarr; Practitioner/vendor &rarr; Advanced/Management.</p>
       </div>
 
-      <div class="info-card">
-        <h4>Cyber Workforce Frameworks</h4>
+      <div class="modern-card">
+        <h4>🏛️ Cyber Workforce Frameworks</h4>
         <p>• <strong>DoD Manual 8140.03 (Feb 2023):</strong> Replaced DoD 8570.01-M. Ties qualification directly to Cyber Workforce roles rather than only certs.<br>
-        • <strong>NICE Framework (NIST SP 800-181):</strong> Universal language for cyber roles, tasks, knowledge, and skills.</p>
+        • <strong>NICE Framework (NIST SP 800-181):</strong> Universal taxonomy for cyber roles, tasks, knowledge, and skills.</p>
       </div>
     </section>
 
-    <!-- Section: Ethics & Canons -->
-    <section id="topic-ethics" class="note-topic">
-      <div class="topic-header">⚖️ 2. Ethics, Law &amp; Professional Codes</div>
+    <!-- Topic 2 -->
+    <section id="topic-ethics" class="study-topic">
+      <div class="study-topic-header">⚖️ 2. Ethics, Law &amp; Professional Codes</div>
 
-      <div class="info-card">
-        <h4>Law versus Ethics</h4>
-        <p>• <strong>Law:</strong> Government statutes enforced by courts (fines or jail).<br>
+      <div class="modern-card">
+        <h4>⚖️ Law versus Ethics</h4>
+        <p>• <strong>Law:</strong> Government statutes enforced by courts (fines or imprisonment).<br>
         • <strong>Ethics:</strong> Professional values and codes (loss of trust, job, credentials).<br>
         • <em>Crucial:</em> An action can be <strong>legal but unethical</strong> (e.g., viewing celebrity records out of curiosity without clinical need).</p>
       </div>
 
-      <div class="info-card">
-        <h4>ISC2 Code of Ethics (Strict Priority Order)</h4>
+      <div class="modern-card">
+        <h4>🛡️ ISC2 Code of Ethics (Strict Priority Order)</h4>
         <p style="margin-bottom:6px;">If duties conflict, the earlier canon <strong>always comes first</strong>:</p>
-        <ol style="margin-left: 20px; line-height: 1.7; font-size: 0.9rem;">
+        <ol style="margin-left: 20px; line-height: 1.7; font-size: 0.91rem;">
           <li><strong>Protect society, the common good, and public trust.</strong></li>
           <li><strong>Act honorably, honestly, justly, responsibly, and legally.</strong></li>
           <li><strong>Provide diligent and competent service.</strong></li>
@@ -743,22 +828,22 @@
         </ol>
       </div>
 
-      <div class="info-card">
-        <h4>Workplace Ethical Actions</h4>
-        <p>• <strong>Responsible Disclosure:</strong> Stop immediately, refrain from taking data, report privately to owner. Never exploit, publicly post, or demand money.<br>
+      <div class="modern-card">
+        <h4>🤝 Workplace Ethical Decisions</h4>
+        <p>• <strong>Responsible Disclosure:</strong> Stop immediately, refrain from downloading data, report privately to owner. Never exploit, publicly post, or demand money.<br>
         • <strong>Conflict of Interest:</strong> Disclose promptly and step away (<strong>recusal</strong>).<br>
         • <strong>Improper Instructions:</strong> Refuse unethical requests (e.g., hiding logs from auditors) and escalate through proper channels.</p>
       </div>
     </section>
 
-    <!-- Section: Compliance Laws -->
-    <section id="topic-compliance" class="note-topic">
-      <div class="topic-header">📜 3. Regulatory Compliance Laws</div>
-      <div class="callout-box">
+    <!-- Topic 3 -->
+    <section id="topic-compliance" class="study-topic">
+      <div class="study-topic-header">📜 3. Regulatory Compliance Matrix</div>
+      <div class="pro-tip">
         ⚠️ <strong>Compliance &ne; Security:</strong> Compliance is a minimum baseline. Passing an audit does not guarantee an organization won't be breached.
       </div>
 
-      <div class="table-container">
+      <div class="table-responsive">
         <table>
           <thead>
             <tr>
@@ -816,11 +901,11 @@
       </div>
     </section>
 
-    <!-- Section: FISMA & OPM -->
-    <section id="topic-fisma" class="note-topic">
-      <div class="topic-header">🏛️ 4. FISMA &amp; Governance</div>
-      <div class="info-card">
-        <h4>FISMA Roles &amp; Responsibilities</h4>
+    <!-- Topic 4 -->
+    <section id="topic-fisma" class="study-topic">
+      <div class="study-topic-header">🏛️ 4. FISMA &amp; Governance</div>
+      <div class="modern-card">
+        <h4>🏛️ FISMA Roles &amp; Responsibilities</h4>
         <p>• <strong>OMB:</strong> Formulates federal cybersecurity policy.<br>
         • <strong>DHS/CISA:</strong> Directs operational protection and security directives.<br>
         • <strong>NIST:</strong> Publishes mandatory standards (RMF SP 800-37, SP 800-53 controls).<br>
@@ -828,8 +913,8 @@
         • <em>Continuous Monitoring:</em> Mandated because IT systems, configurations, and threats evolve daily.</p>
       </div>
 
-      <div class="info-card">
-        <h4>Lessons from the 2015 OPM Breach</h4>
+      <div class="modern-card">
+        <h4>💥 Lessons from the 2015 OPM Breach</h4>
         <p>Over 21M records stolen. Key lessons:<br>
         1. Maintain an accurate and complete system inventory.<br>
         2. Implement strong authentication (MFA/smart cards).<br>
@@ -837,11 +922,11 @@
       </div>
     </section>
 
-    <!-- Section: Philippine Cyber Legislation -->
-    <section id="topic-ph" class="note-topic">
-      <div class="topic-header">🇵🇭 5. Philippine Cyber Legislation</div>
-      <div class="info-card">
-        <h4>RA 10173 – Data Privacy Act of 2012</h4>
+    <!-- Topic 5 -->
+    <section id="topic-ph" class="study-topic">
+      <div class="study-topic-header">🇵🇭 5. Philippine Cyber Legislation</div>
+      <div class="modern-card">
+        <h4>🔒 RA 10173 – Data Privacy Act of 2012</h4>
         <p>Governed by three mandatory pillars:<br>
         1. <strong>Transparency:</strong> Inform individuals why and how data is collected.<br>
         2. <strong>Legitimate Purpose:</strong> Process only for lawful, declared reasons.<br>
@@ -850,133 +935,145 @@
         • <strong>Breach Notice:</strong> Report qualifying breaches within <strong>72 hours</strong> of knowledge.</p>
       </div>
 
-      <div class="info-card">
-        <h4>RA 10175 – Cybercrime Prevention Act of 2012</h4>
+      <div class="modern-card">
+        <h4>⚖️ RA 10175 – Cybercrime Prevention Act of 2012</h4>
         <p>Defines criminal penalties for offenses including illegal access (hacking), illegal interception, and data interference.</p>
       </div>
     </section>
   </main>
 
-  <!-- TAB 2: PRACTICE SCENARIOS (FLASHCARDS 1-10) -->
-  <main id="tab-scenarios" class="card hidden">
+  <!-- TAB 2: TOP 10 FLASHCARDS -->
+  <main id="tab-scenarios" class="card-panel hidden">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
       <div>
-        <h2 style="font-size:1.15rem; font-weight:800;">Top 10 Exam Scenarios</h2>
-        <p style="font-size:0.82rem; color:var(--text-muted);">Tap each card to reveal the verified answer.</p>
+        <h2 style="font-size:1.15rem; font-weight:800;">⚡ Top 10 Exam Flashcards</h2>
+        <p style="font-size:0.82rem; color:var(--text-muted);">Tap each card to reveal verified answers.</p>
       </div>
-      <button class="tool-btn" onclick="toggleAllScenarios()" id="btn-toggle-all">Show All</button>
+      <button class="pill-action" onclick="toggleAllScenarios()" id="btn-toggle-all">Show All</button>
     </div>
 
     <div id="flashcards-wrapper"></div>
   </main>
 
-  <!-- TAB 3: MCQ QUIZ -->
-  <main id="tab-mcq" class="card hidden">
-    <div class="quiz-top">
-      <select id="mcq-topic-select" onchange="initMcqQuiz()" style="font-size:0.85rem; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text); max-width:65%;">
+  <!-- TAB 3: MCQ PRACTICE QUIZ -->
+  <main id="tab-mcq" class="card-panel hidden">
+    <div class="quiz-stats">
+      <select id="mcq-topic-select" onchange="initMcqQuiz()" style="font-size:0.85rem; padding:6px 10px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--text); max-width:65%;">
         <option value="all">All Topics (32 Questions)</option>
         <option value="Practice Scenarios">10 Practice Scenarios</option>
         <option value="Education & Certifications">Education &amp; Certs</option>
         <option value="Ethics & Compliance">Ethics &amp; Compliance</option>
         <option value="FISMA & Frameworks">FISMA &amp; Frameworks</option>
       </select>
-      <span class="quiz-score" id="mcq-score-badge">0 / 0</span>
+      <span class="quiz-score-pill" id="mcq-score-badge">0 / 0</span>
     </div>
 
-    <div class="quiz-progress-bar">
-      <div class="quiz-progress-fill" id="mcq-progress-bar"></div>
+    <div class="progress-track">
+      <div class="progress-bar" id="mcq-progress-bar"></div>
     </div>
 
     <div id="mcq-card-area">
-      <div class="quiz-badge" id="mcq-badge">Question 1 of 32</div>
-      <div class="quiz-question" id="mcq-q-text"></div>
-      <div class="options-list" id="mcq-opt-container"></div>
-      <div class="explanation-box hidden" id="mcq-rationale-box"></div>
+      <div class="quiz-topic-badge" id="mcq-badge">Question 1 of 32</div>
+      <div class="quiz-question-box" id="mcq-q-text"></div>
+      <div class="choices-column" id="mcq-opt-container"></div>
+      <div class="quiz-expl hidden" id="mcq-rationale-box"></div>
       <div style="display:flex; gap:8px;">
-        <button class="btn-action hidden" id="mcq-btn-next" onclick="stepNextMcq()">Next Question ➔</button>
-        <button class="tool-btn" style="padding:12px 14px;" onclick="initMcqQuiz()">🔄 Restart</button>
+        <button class="btn-gradient hidden" id="mcq-btn-next" onclick="stepNextMcq()">Next Question ➔</button>
+        <button class="pill-action" style="padding:12px 14px;" onclick="initMcqQuiz()">🔄 Restart</button>
       </div>
     </div>
 
-    <div id="mcq-done-area" class="hidden" style="text-align:center; padding:20px 0;">
-      <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:8px;">🎉 Quiz Completed!</h3>
+    <div id="mcq-done-area" class="hidden" style="text-align:center; padding:24px 0;">
+      <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:8px;">🎉 Quiz Completed!</h3>
       <p id="mcq-final-score" style="font-size:1.1rem; margin-bottom:16px;"></p>
-      <button class="btn-action" onclick="initMcqQuiz()">Retake Quiz</button>
+      <button class="btn-gradient" onclick="initMcqQuiz()">Retake Quiz</button>
     </div>
   </main>
 
   <!-- TAB 4: ACRONYM DRILL -->
-  <main id="tab-acronym" class="card hidden">
-    <div class="quiz-top">
-      <select id="acr-filter-select" onchange="initAcrQuiz()" style="font-size:0.85rem; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text); max-width:65%;">
+  <main id="tab-acronym" class="card-panel hidden">
+    <div class="quiz-stats">
+      <select id="acr-filter-select" onchange="initAcrQuiz()" style="font-size:0.85rem; padding:6px 10px; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--surface); color:var(--text); max-width:65%;">
         <option value="all">All Acronyms (47)</option>
         <option value="Laws & Compliance">Laws &amp; Compliance</option>
         <option value="Certifications & Orgs">Certifications &amp; Orgs</option>
         <option value="Frameworks & Agencies">Frameworks &amp; Agencies</option>
       </select>
-      <span class="quiz-score" id="acr-score-badge">0 / 0</span>
+      <span class="quiz-score-pill" id="acr-score-badge">0 / 0</span>
     </div>
 
-    <div class="quiz-progress-bar">
-      <div class="quiz-progress-fill" id="acr-progress-bar"></div>
+    <div class="progress-track">
+      <div class="progress-bar" id="acr-progress-bar"></div>
     </div>
 
     <div id="acr-card-area">
-      <div class="quiz-badge" id="acr-badge">Acronym 1 of 47</div>
-      <div class="quiz-question" id="acr-q-text"></div>
-      <div class="options-list" id="acr-opt-container"></div>
-      <div class="explanation-box hidden" id="acr-rationale-box"></div>
+      <div class="quiz-topic-badge" id="acr-badge">Acronym 1 of 47</div>
+      <div class="quiz-question-box" id="acr-q-text"></div>
+      <div class="choices-column" id="acr-opt-container"></div>
+      <div class="quiz-expl hidden" id="acr-rationale-box"></div>
       <div style="display:flex; gap:8px;">
-        <button class="btn-action hidden" id="acr-btn-next" onclick="stepNextAcr()">Next Acronym ➔</button>
-        <button class="tool-btn" style="padding:12px 14px;" onclick="initAcrQuiz()">🔄 Restart</button>
+        <button class="btn-gradient hidden" id="acr-btn-next" onclick="stepNextAcr()">Next Acronym ➔</button>
+        <button class="pill-action" style="padding:12px 14px;" onclick="initAcrQuiz()">🔄 Restart</button>
       </div>
     </div>
 
-    <div id="acr-done-area" class="hidden" style="text-align:center; padding:20px 0;">
-      <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:8px;">🎉 Drill Completed!</h3>
+    <div id="acr-done-area" class="hidden" style="text-align:center; padding:24px 0;">
+      <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:8px;">🎉 Drill Finished!</h3>
       <p id="acr-final-score" style="font-size:1.1rem; margin-bottom:16px;"></p>
-      <button class="btn-action" onclick="initAcrQuiz()">Restart Drill</button>
+      <button class="btn-gradient" onclick="initAcrQuiz()">Restart Drill</button>
     </div>
   </main>
 
-  <!-- TAB 5: ACRONYM REFERENCE -->
-  <main id="tab-list" class="card hidden">
-    <div class="search-bar-wrap">
-      <input type="text" id="lookup-input" class="search-input" placeholder="🔍 Search acronym, meaning, or category..." onkeyup="filterAcronymCards()">
+  <!-- TAB 5: ACRONYM EXPLORER -->
+  <main id="tab-list" class="card-panel hidden">
+    <!-- Category Filter Chips -->
+    <div class="filter-chips">
+      <button class="chip-btn active" onclick="setAcrCategory('all', this)">All ✨</button>
+      <button class="chip-btn" onclick="setAcrCategory('Laws & Compliance', this)">Laws ⚖️</button>
+      <button class="chip-btn" onclick="setAcrCategory('Certifications & Orgs', this)">Certs 🎖️</button>
+      <button class="chip-btn" onclick="setAcrCategory('Frameworks & Agencies', this)">Agencies 🏛️</button>
     </div>
+
+    <div class="search-glow-wrap">
+      <input type="text" id="lookup-input" class="search-input-field" placeholder="🔍 Search acronym, meaning, or keyword..." onkeyup="filterAcronymCards()">
+    </div>
+    
     <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-muted); font-weight:700; margin-bottom:10px;">
       <span id="lookup-count">Showing 47 items</span>
       <span>Tap 📋 to copy</span>
     </div>
+    
     <div id="acronym-cards-container"></div>
   </main>
 
-  <!-- Fixed Android Bottom Navigation Bar -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" onclick="navigate('notes')">
-      <span class="nav-icon">📖</span>
-      <span>Notes</span>
-    </button>
-    <button class="nav-item" onclick="navigate('scenarios')">
-      <span class="nav-icon">⚡</span>
-      <span>Q&amp;A 1-10</span>
-    </button>
-    <button class="nav-item" onclick="navigate('mcq')">
-      <span class="nav-icon">📝</span>
-      <span>MCQ</span>
-    </button>
-    <button class="nav-item" onclick="navigate('acronym')">
-      <span class="nav-icon">🔤</span>
-      <span>Drill</span>
-    </button>
-    <button class="nav-item" onclick="navigate('list')">
-      <span class="nav-icon">📋</span>
-      <span>Lookup</span>
-    </button>
-  </nav>
+  <!-- Floating Dock Bottom Navigation -->
+  <div class="dock-container">
+    <nav class="dock">
+      <button class="dock-btn active" onclick="navigate('notes')">
+        <span class="dock-emoji">🧠</span>
+        <span>Notes</span>
+      </button>
+      <button class="dock-btn" onclick="navigate('scenarios')">
+        <span class="dock-emoji">⚡</span>
+        <span>Top 10</span>
+      </button>
+      <button class="dock-btn" onclick="navigate('mcq')">
+        <span class="dock-emoji">🎯</span>
+        <span>Quiz</span>
+      </button>
+      <button class="dock-btn" onclick="navigate('acronym')">
+        <span class="dock-emoji">🔤</span>
+        <span>Drill</span>
+      </button>
+      <button class="dock-btn" onclick="navigate('list')">
+        <span class="dock-emoji">🔎</span>
+        <span>Lookup</span>
+      </button>
+    </nav>
+  </div>
 
   <!-- Toast Notification -->
-  <div id="toast" class="toast">Copied to clipboard!</div>
+  <div id="toast" class="toast-pill">Copied to clipboard! ✨</div>
 
 <script>
   // Top 10 Practice Scenarios
@@ -1472,7 +1569,7 @@
     { acr: "RA", mean: "Republic Act (RA 10173 Data Privacy Act; RA 10175 Cybercrime Prevention Act)", cat: "Laws & Compliance" }
   ];
 
-  // Utility: Shuffle
+  // Shuffler
   function shuffle(array) {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -1490,16 +1587,16 @@
     setTimeout(() => t.classList.remove('show'), 2000);
   }
 
-  // Clipboard copy
+  // Copy to clipboard
   function copyText(text) {
     navigator.clipboard.writeText(text).then(() => {
-      showToast('Copied to clipboard!');
+      showToast('Copied to clipboard! ✨');
     }).catch(() => {
-      showToast('Copied!');
+      showToast('Copied! ✨');
     });
   }
 
-  // Bottom Navigation
+  // Navigation Dock
   function navigate(tabId) {
     const tabs = ['notes', 'scenarios', 'mcq', 'acronym', 'list'];
     tabs.forEach(t => {
@@ -1511,7 +1608,7 @@
       }
     });
 
-    document.querySelectorAll('.bottom-nav .nav-item').forEach((btn, idx) => {
+    document.querySelectorAll('.dock .dock-btn').forEach((btn, idx) => {
       if (tabs[idx] === tabId) {
         btn.classList.add('active');
       } else {
@@ -1523,8 +1620,8 @@
   }
 
   // Scroll to topic in Notes
-  function scrollToTopic(topicId) {
-    document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+  function jumpToTopic(topicId) {
+    document.querySelectorAll('.t-pill').forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
     const target = document.getElementById(topicId);
     if (target) {
@@ -1532,26 +1629,26 @@
     }
   }
 
-  // Render Practice Scenarios
+  // Render Top 10 Flashcards
   function renderScenarios() {
     const wrap = document.getElementById('flashcards-wrapper');
     wrap.innerHTML = '';
     scenariosData.forEach(item => {
       const card = document.createElement('div');
-      card.className = 'flashcard';
+      card.className = 'qa-card';
       const cleanPlain = item.answer.replace(/<[^>]*>/g, ' ');
       card.innerHTML = `
-        <div class="card-meta">
-          <span class="badge-scenario">Scenario #${item.id}</span>
-          <button class="btn-copy" onclick="copyText('Scenario #${item.id}: ${item.q.replace(/'/g, "\\'")}\\n\\nAnswer: ${cleanPlain.replace(/'/g, "\\'")}')">
+        <div class="qa-header">
+          <span class="qa-chip">SCENARIO ${item.id < 10 ? '0' + item.id : item.id}</span>
+          <button class="qa-copy" onclick="copyText('Scenario #${item.id}: ${item.q.replace(/'/g, "\\'")}\\n\\nAnswer: ${cleanPlain.replace(/'/g, "\\'")}')">
             📋 Copy
           </button>
         </div>
-        <div class="scenario-text">${item.q}</div>
-        <button class="btn-reveal" onclick="toggleCardAnswer(${item.id})">
-          <span id="btn-label-${item.id}">👁️ Reveal Answer</span>
+        <div class="qa-question">${item.q}</div>
+        <button class="qa-reveal-btn" onclick="toggleCardAnswer(${item.id})">
+          <span id="btn-label-${item.id}">✨ Reveal Answer</span>
         </button>
-        <div class="answer-panel hidden" id="card-ans-${item.id}">
+        <div class="qa-answer hidden" id="card-ans-${item.id}">
           ${item.answer}
         </div>
       `;
@@ -1567,7 +1664,7 @@
       btn.textContent = '🙈 Hide Answer';
     } else {
       ans.classList.add('hidden');
-      btn.textContent = '👁️ Reveal Answer';
+      btn.textContent = '✨ Reveal Answer';
     }
   }
 
@@ -1582,7 +1679,7 @@
         btn.textContent = '🙈 Hide Answer';
       } else {
         ans.classList.add('hidden');
-        btn.textContent = '👁️ Reveal Answer';
+        btn.textContent = '✨ Reveal Answer';
       }
     });
     document.getElementById('btn-toggle-all').textContent = allOpen ? 'Hide All' : 'Show All';
@@ -1625,15 +1722,15 @@
     const opts = shuffle(item.options.map((t, i) => ({ text: t, isCorrect: i === item.answer })));
     opts.forEach(opt => {
       const b = document.createElement('button');
-      b.className = 'opt-btn';
-      b.innerHTML = `<span>○</span> <span>${opt.text}</span>`;
+      b.className = 'choice-card';
+      b.innerHTML = `<span style="opacity:0.6;">○</span> <span>${opt.text}</span>`;
       b.onclick = () => onSelectMcq(b, opt.isCorrect, opts, item.rationale);
       optWrap.appendChild(b);
     });
   }
 
   function onSelectMcq(btn, isCorrect, allOpts, rationale) {
-    const allButtons = document.querySelectorAll('#mcq-opt-container .opt-btn');
+    const allButtons = document.querySelectorAll('#mcq-opt-container .choice-card');
     allButtons.forEach((b, i) => {
       b.disabled = true;
       if (allOpts[i].isCorrect) {
@@ -1714,15 +1811,15 @@
 
     choices.forEach(opt => {
       const b = document.createElement('button');
-      b.className = 'opt-btn';
-      b.innerHTML = `<span>○</span> <span>${opt.text}</span>`;
+      b.className = 'choice-card';
+      b.innerHTML = `<span style="opacity:0.6;">○</span> <span>${opt.text}</span>`;
       b.onclick = () => onSelectAcr(b, opt.isCorrect, choices, item);
       optWrap.appendChild(b);
     });
   }
 
   function onSelectAcr(btn, isCorrect, allOpts, item) {
-    const allButtons = document.querySelectorAll('#acr-opt-container .opt-btn');
+    const allButtons = document.querySelectorAll('#acr-opt-container .choice-card');
     allButtons.forEach((b, i) => {
       b.disabled = true;
       if (allOpts[i].isCorrect) {
@@ -1761,22 +1858,31 @@
     }
   }
 
-  // ---------------- ACRONYM REFERENCE CARDS ----------------
+  // ---------------- ACRONYM EXPLORER ----------------
+  let currentCategory = 'all';
+
+  function setAcrCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterAcronymCards();
+  }
+
   function renderAcronymCards(list) {
     const container = document.getElementById('acronym-cards-container');
     container.innerHTML = '';
     list.forEach(item => {
       const div = document.createElement('div');
-      div.className = 'acronym-card-item';
+      div.className = 'acr-item-card';
       div.innerHTML = `
-        <div class="acr-top">
-          <span class="acr-tag">${item.acr}</span>
+        <div class="acr-card-top">
+          <span class="acr-code">${item.acr}</span>
           <div style="display:flex; align-items:center; gap:6px;">
-            <span class="acr-category">${item.cat}</span>
-            <button class="btn-copy" onclick="copyText('${item.acr} = ${item.mean.replace(/'/g, "\\'")}')">📋</button>
+            <span class="acr-cat-tag">${item.cat}</span>
+            <button class="qa-copy" onclick="copyText('${item.acr} = ${item.mean.replace(/'/g, "\\'")}')">📋</button>
           </div>
         </div>
-        <div class="acr-meaning">${item.mean}</div>
+        <div class="acr-definition">${item.mean}</div>
       `;
       container.appendChild(div);
     });
@@ -1785,20 +1891,22 @@
 
   function filterAcronymCards() {
     const q = document.getElementById('lookup-input').value.toLowerCase();
-    const filtered = acronymData.filter(i => 
-      i.acr.toLowerCase().includes(q) ||
-      i.mean.toLowerCase().includes(q) ||
-      i.cat.toLowerCase().includes(q)
-    );
+    const filtered = acronymData.filter(i => {
+      const matchCat = currentCategory === 'all' || i.cat === currentCategory;
+      const matchQuery = i.acr.toLowerCase().includes(q) ||
+                         i.mean.toLowerCase().includes(q) ||
+                         i.cat.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
     renderAcronymCards(filtered);
   }
 
-  // Theme & Font Sizing
+  // Theme & Text Sizing
   function toggleTheme() {
     const isDark = document.body.getAttribute('data-theme') === 'dark';
     const next = isDark ? 'light' : 'dark';
     document.body.setAttribute('data-theme', next);
-    document.getElementById('theme-btn').textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+    document.getElementById('theme-toggle-btn').textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
     localStorage.setItem('reviewer_theme', next);
   }
 
@@ -1812,7 +1920,7 @@
   const savedTheme = localStorage.getItem('reviewer_theme');
   if (savedTheme) {
     document.body.setAttribute('data-theme', savedTheme);
-    document.getElementById('theme-btn').textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    document.getElementById('theme-toggle-btn').textContent = savedTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
   }
 
   renderScenarios();
