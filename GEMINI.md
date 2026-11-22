@@ -20,3 +20,4 @@ These rules apply across this codebase and all future tasks. Enforce them strict
 - **Terminal Operations:** Rely on direct CLI commands for running scripts, testing, and managing dependencies.
 - **GitHub Standards:** Maintain clean version control practices with descriptive commit messages and modular edits.
 - **MCP (Model Context Protocol):** Leverage connected tools, databases, and APIs (GitHub, Figma, Supabase) for live context and secure workflow execution.
+
