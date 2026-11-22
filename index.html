@@ -2,428 +2,359 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>ITEP 413: Information Assurance and Security 2 | Finals Reviewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>ITEP 413: IAS 2 Finals Reviewer | Mobile App</title>
   <style>
     :root {
       --bg: #f8fafc;
       --surface: #ffffff;
       --surface-alt: #f1f5f9;
+      --surface-border: #e2e8f0;
       --primary: #1e3a8a;
       --primary-hover: #1d4ed8;
-      --primary-light: #dbeafe;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
       --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --correct-bg: #dcfce7;
-      --correct-border: #16a34a;
-      --correct-text: #14532d;
-      --wrong-bg: #fee2e2;
-      --wrong-border: #dc2626;
-      --wrong-text: #7f1d1d;
+      --correct-bg: #ecfdf5;
+      --correct-border: #10b981;
+      --correct-text: #065f46;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #ef4444;
+      --wrong-text: #991b1b;
       --badge-bg: #e0e7ff;
       --badge-text: #3730a3;
-      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      --card-radius: 14px;
+      --safe-bottom: env(safe-area-inset-bottom, 12px);
     }
 
     [data-theme="dark"] {
       --bg: #090d16;
       --surface: #111827;
-      --surface-alt: #1f2937;
+      --surface-alt: #1a2234;
+      --surface-border: #334155;
       --primary: #3b82f6;
       --primary-hover: #60a5fa;
-      --primary-light: #1e293b;
-      --text: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border: #374151;
+      --primary-light: #172554;
+      --primary-border: #1e3a8a;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #26334d;
       --correct-bg: #064e3b;
       --correct-border: #10b981;
       --correct-text: #a7f3d0;
       --wrong-bg: #7f1d1d;
       --wrong-border: #ef4444;
       --wrong-text: #fecaca;
-      --badge-bg: #312e81;
-      --badge-text: #c7d2fe;
-      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --badge-bg: #2e1065;
+      --badge-text: #ddd6fe;
+      --nav-bg: rgba(17, 24, 39, 0.95);
+      --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      padding: 12px 12px 90px 12px;
-      transition: background 0.25s, color 0.25s;
+      line-height: 1.55;
+      font-size: 16px;
+      transition: background-color 0.2s, color 0.2s;
     }
 
-    .container {
-      max-width: 860px;
+    body {
+      padding: 10px 12px 90px 12px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
-    /* Header */
-    header {
-      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+    /* Top App Header */
+    .app-header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
       color: #ffffff;
-      padding: 20px 18px;
-      border-radius: 14px;
-      margin-bottom: 16px;
+      padding: 16px 14px;
+      border-radius: var(--card-radius);
+      margin-bottom: 12px;
       box-shadow: var(--card-shadow);
       position: relative;
     }
 
-    [data-theme="dark"] header {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border: 1px solid #334155;
+    [data-theme="dark"] .app-header {
+      background: linear-gradient(135deg, #1e293b 0%, #0b1120 100%);
+      border: 1px solid var(--border);
     }
 
-    .header-sub {
-      font-size: 0.8rem;
+    .header-institution {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0.85;
       font-weight: 700;
+      opacity: 0.85;
+      margin-bottom: 2px;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      line-height: 1.25;
       margin-bottom: 4px;
     }
 
-    header h1 {
-      font-size: 1.35rem;
-      line-height: 1.3;
-      margin-bottom: 6px;
-      font-weight: 800;
-    }
-
-    header p {
-      font-size: 0.88rem;
+    .header-desc {
+      font-size: 0.82rem;
       opacity: 0.9;
     }
 
-    /* Quick Action Bar */
-    .top-bar {
+    /* Utility Toolbar */
+    .toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tool-group {
-      display: flex;
       gap: 8px;
-      align-items: center;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      padding-bottom: 2px;
     }
 
-    .btn-tool {
+    .tool-btn {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 8px 14px;
+      padding: 7px 12px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      box-shadow: var(--card-shadow);
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: transform 0.1s, background 0.15s;
     }
 
-    /* Scrollable Tab Navigation */
-    .nav-tabs-wrapper {
-      position: sticky;
-      top: 10px;
-      z-index: 100;
-      margin-bottom: 16px;
-      background: var(--bg);
-      padding: 4px 0;
+    .tool-btn:active {
+      transform: scale(0.96);
     }
 
-    .tabs {
+    /* Sub-nav Pill Filter for Notes */
+    .pills-scroll {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 6px;
+      padding: 2px 2px 8px 2px;
+      margin-bottom: 10px;
       scrollbar-width: none;
-      -ms-overflow-style: none;
     }
 
-    .tabs::-webkit-scrollbar {
+    .pills-scroll::-webkit-scrollbar {
       display: none;
     }
 
-    .tab-btn {
-      white-space: nowrap;
-      padding: 10px 16px;
+    .pill-btn {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.9rem;
       color: var(--text-muted);
-      transition: all 0.2s;
+      padding: 6px 14px;
+      border-radius: 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
       flex-shrink: 0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
-    .tab-btn.active {
+    .pill-btn.active {
       background: var(--primary);
       color: #ffffff;
       border-color: var(--primary);
-      box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
     }
 
-    /* Cards */
+    /* Main Container Cards */
     .card {
       background: var(--surface);
-      padding: 20px 18px;
-      border-radius: 14px;
       border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 16px 14px;
       box-shadow: var(--card-shadow);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    /* Filter Controls */
-    .controls {
+    /* Fixed Android Bottom Navigation Bar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 10px;
+      padding: 6px 8px calc(6px + var(--safe-bottom)) 8px;
+      z-index: 999;
+      box-shadow: 0 -3px 12px rgba(0,0,0,0.08);
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .score-badge {
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-
-    select, input[type="text"] {
-      width: 100%;
-      max-width: 380px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      background: var(--surface);
-      color: var(--text);
-    }
-
-    /* Practice Flashcard Styles */
-    .scenario-card {
-      background: var(--surface-alt);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 14px;
-      transition: transform 0.15s;
-    }
-
-    .scenario-num {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: #ffffff;
-      background: var(--primary);
-      padding: 3px 10px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-
-    .scenario-q {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-
-    .scenario-answer {
-      background: var(--surface);
-      border-left: 4px solid var(--primary);
-      padding: 12px 14px;
-      border-radius: 6px;
-      margin-top: 10px;
-      font-size: 0.95rem;
-    }
-
-    .reveal-btn {
-      background: var(--primary);
-      color: #ffffff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* MCQ Quiz Styles */
-    .question-header {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .question-text {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      line-height: 1.4;
-    }
-
-    .options-grid {
+    .nav-item {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-    }
-
-    .option-btn {
-      text-align: left;
-      padding: 14px 16px;
-      background: var(--surface-alt);
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.98rem;
-      color: var(--text);
-      transition: all 0.15s;
-      line-height: 1.4;
-      min-height: 50px;
-    }
-
-    .option-btn:hover:not(:disabled) {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    .option-btn:disabled {
-      cursor: default;
-    }
-
-    .option-btn.correct {
-      background: var(--correct-bg) !important;
-      border-color: var(--correct-border) !important;
-      color: var(--correct-text) !important;
-      font-weight: 700;
-    }
-
-    .option-btn.wrong {
-      background: var(--wrong-bg) !important;
-      border-color: var(--wrong-border) !important;
-      color: var(--wrong-text) !important;
-    }
-
-    .rationale {
-      margin-top: 16px;
-      padding: 14px;
-      background: var(--surface-alt);
-      border-left: 4px solid var(--primary);
-      border-radius: 6px;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #ffffff;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
       border: none;
-      padding: 12px 22px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 700;
+      color: var(--text-muted);
       cursor: pointer;
-      margin-top: 16px;
-      min-height: 48px;
+      padding: 4px 2px;
+      border-radius: 8px;
+      transition: color 0.15s, transform 0.1s;
+      font-size: 0.72rem;
+      font-weight: 600;
+      gap: 3px;
     }
 
-    /* Study Notes Styles */
-    .note-section {
-      margin-bottom: 24px;
+    .nav-item:active {
+      transform: scale(0.92);
+    }
+
+    .nav-icon {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .nav-item.active .nav-icon {
+      transform: translateY(-1px);
+    }
+
+    /* Study Notes Layout */
+    .note-topic {
+      margin-bottom: 22px;
+      padding-bottom: 18px;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 20px;
     }
 
-    .note-section:last-child {
+    .note-topic:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
 
-    .note-title {
-      font-size: 1.25rem;
-      color: var(--primary);
+    .topic-header {
+      font-size: 1.15rem;
       font-weight: 800;
-      margin-bottom: 12px;
+      color: var(--primary);
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .note-card {
+    .info-card {
       background: var(--surface-alt);
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
       border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
     }
 
-    .note-card h4 {
-      font-size: 1rem;
+    .info-card h4 {
+      font-size: 0.95rem;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       color: var(--text);
     }
 
-    .highlight-box {
-      background: var(--primary-light);
-      border-left: 4px solid var(--primary);
-      padding: 12px 14px;
-      border-radius: 6px;
-      margin: 12px 0;
-      font-weight: 600;
-      font-size: 0.92rem;
+    .info-card p, .info-card li {
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
 
-    /* Responsive Tables */
-    .table-wrapper {
+    .callout-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* Mobile Responsive Comparison Block */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    @media (min-width: 600px) {
+      .comparison-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .comp-box {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .comp-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    /* Tables on Mobile */
+    .table-container {
+      width: 100%;
       overflow-x: auto;
-      margin: 14px 0;
+      margin: 10px 0;
       border-radius: 8px;
       border: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 500px;
-      font-size: 0.92rem;
+      min-width: 480px;
+      font-size: 0.88rem;
     }
 
     th, td {
+      padding: 10px 12px;
       text-align: left;
-      padding: 12px 14px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -433,396 +364,622 @@
       color: var(--primary);
     }
 
-    tr:last-child td {
-      border-bottom: none;
+    /* Practice Scenarios (Top 10) */
+    .flashcard {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      transition: border-color 0.15s;
     }
 
-    /* Mobile Quick Nav Bar */
-    .bottom-status {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 10px 16px;
+    .card-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
-      z-index: 99;
-      font-size: 0.85rem;
+      margin-bottom: 8px;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding: 8px 8px 80px 8px;
-      }
-      header {
-        padding: 16px 14px;
-      }
-      header h1 {
-        font-size: 1.2rem;
-      }
-      .card {
-        padding: 16px 12px;
-      }
-      .tab-btn {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-      }
-      .question-text {
-        font-size: 1.05rem;
-      }
-      .option-btn {
-        padding: 12px 14px;
-        font-size: 0.92rem;
-      }
+    .badge-scenario {
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+    }
+
+    .scenario-text {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .btn-reveal {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 44px;
+      transition: all 0.15s;
+    }
+
+    .btn-reveal:active {
+      transform: scale(0.98);
+      background: var(--primary-light);
+    }
+
+    .answer-panel {
+      background: var(--surface);
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* MCQ Quiz Styling */
+    .quiz-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--surface-alt);
+      border-radius: 4px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.25s ease;
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .quiz-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .quiz-score {
+      font-size: 0.88rem;
+      font-weight: 800;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 3px 10px;
+      border-radius: 14px;
+    }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-btn {
+      text-align: left;
+      padding: 12px 14px;
+      background: var(--surface-alt);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.94rem;
+      color: var(--text);
+      cursor: pointer;
+      line-height: 1.4;
+      min-height: 48px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .opt-btn:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    .opt-btn.correct {
+      background: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .opt-btn.wrong {
+      background: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+    }
+
+    .explanation-box {
+      background: var(--surface-alt);
+      border-left: 4px solid var(--primary);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .btn-action {
+      width: 100%;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      min-height: 48px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn-action:active {
+      transform: scale(0.98);
+    }
+
+    /* Acronym List (Mobile Cards) */
+    .search-bar-wrap {
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .acronym-card-item {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+    }
+
+    .acr-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .acr-tag {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .acr-category {
+      font-size: 0.72rem;
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .acr-meaning {
+      font-size: 0.92rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.9);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- University & Course Header -->
-  <header>
-    <div class="header-sub">Republic of the Philippines • LSPU • CCS</div>
-    <h1>ITEP 413: Information Assurance and Security 2</h1>
-    <p>Finals Comprehensive Reviewer: Notes, 10 Scenarios, 32 MCQs &amp; 47 Acronyms</p>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-institution">Republic of the Philippines • LSPU • CCS</div>
+    <div class="header-title">ITEP 413: IAS 2 Finals Reviewer</div>
+    <div class="header-desc">Complete Study Guide, Top 10 Practice Q&amp;A, 32 MCQs &amp; 47 Acronyms</div>
   </header>
 
   <!-- Top Utilities -->
-  <div class="top-bar">
-    <div class="tool-group">
-      <button class="btn-tool" onclick="toggleTheme()" id="theme-btn">🌙 Dark Mode</button>
-      <button class="btn-tool" onclick="adjustFontSize(1)">A+ Larger</button>
-      <button class="btn-tool" onclick="adjustFontSize(-1)">A- Smaller</button>
-    </div>
-    <div class="tool-group">
-      <a href="https://github.com/03DxD12/Finals-413---1st-Sem" target="_blank" class="btn-tool" style="text-decoration:none; color:inherit;">
-        ⭐ GitHub Repo
-      </a>
-    </div>
+  <div class="toolbar">
+    <button class="tool-btn" onclick="toggleTheme()" id="theme-btn">🌙 Dark Mode</button>
+    <button class="tool-btn" onclick="adjustTextSize(1)">A+ Larger</button>
+    <button class="tool-btn" onclick="adjustTextSize(-1)">A- Smaller</button>
+    <a href="https://github.com/03DxD12/Finals-413---1st-Sem" target="_blank" class="tool-btn" style="text-decoration:none; color:inherit;">
+      ⭐ GitHub
+    </a>
   </div>
 
-  <!-- Navigation Tabs -->
-  <div class="nav-tabs-wrapper">
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('notes')">📖 Study Notes</button>
-      <button class="tab-btn" onclick="switchTab('scenarios')">⚡ Practice Q&amp;A (1-10)</button>
-      <button class="tab-btn" onclick="switchTab('mcq')">📝 MCQ Quiz (32)</button>
-      <button class="tab-btn" onclick="switchTab('acronym')">🔤 Acronym Quiz (47)</button>
-      <button class="tab-btn" onclick="switchTab('list')">📋 Acronym Reference</button>
+  <!-- TAB 1: STUDY NOTES -->
+  <main id="tab-notes" class="card">
+    <!-- Topic Jump Pills -->
+    <div class="pills-scroll">
+      <button class="pill-btn active" onclick="scrollToTopic('topic-edu')">Education &amp; Training</button>
+      <button class="pill-btn" onclick="scrollToTopic('topic-ethics')">Ethics &amp; Canons</button>
+      <button class="pill-btn" onclick="scrollToTopic('topic-compliance')">Compliance Laws</button>
+      <button class="pill-btn" onclick="scrollToTopic('topic-fisma')">FISMA &amp; OPM</button>
+      <button class="pill-btn" onclick="scrollToTopic('topic-ph')">Philippine Laws</button>
     </div>
-  </div>
 
-  <!-- SECTION 1: STUDY NOTES -->
-  <div id="section-notes" class="card">
-    <!-- Topic 1 -->
-    <div class="note-section">
-      <div class="note-title">1. Professional Education, Training, and Certification</div>
+    <!-- Section: Education & Training -->
+    <section id="topic-edu" class="note-topic">
+      <div class="topic-header">🎓 1. Education, Training &amp; Certifications</div>
       
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Level</th>
-              <th>Meaning</th>
-              <th>Real-World Example</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Awareness</strong></td>
-              <td>Short messages that make everyone notice security and know what to do.</td>
-              <td>A reminder to all staff about a new SMS/email phishing campaign.</td>
-            </tr>
-            <tr>
-              <td><strong>Training</strong></td>
-              <td>Teaching a specific, hands-on skill for a specific job role.</td>
-              <td>A hands-on course on restoring enterprise servers from backup.</td>
-            </tr>
-            <tr>
-              <td><strong>Education</strong></td>
-              <td>Long-term academic learning that builds understanding and judgment.</td>
-              <td>A university degree program (e.g., BSIT, Master's in Cybersecurity).</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="comparison-grid">
+        <div class="comp-box">
+          <div class="comp-title">Awareness</div>
+          <p style="font-size:0.88rem;">Short messages making everyone notice security.<br><em>Example:</em> Staff reminder about phishing texts.</p>
+        </div>
+        <div class="comp-box">
+          <div class="comp-title">Training</div>
+          <p style="font-size:0.88rem;">Teaching specific hands-on skills for a job.<br><em>Example:</em> Lab course on restoring server backups.</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <h4>Education</h4>
+        <p>Long-term learning building broad understanding and judgment (e.g., IT/Cybersecurity Degree program).</p>
       </div>
 
-      <div class="highlight-box">
-        💡 <strong>Key Memory Aid:</strong> Awareness tells you <em>that</em>, Training teaches you <em>how</em>, Education helps you understand <em>why</em>.
+      <div class="callout-box">
+        💡 <strong>Memory Aid:</strong> Awareness tells you <em>that</em>, Training teaches you <em>how</em>, Education helps you understand <em>why</em>.
       </div>
 
-      <div class="note-card">
-        <h4>NIST SP 800-50 Rev. 1 (2024) Learning Cycle</h4>
-        <p>A cybersecurity learning program is an ongoing continuous cycle: <strong>Plan &rarr; Deliver &rarr; Measure Results &rarr; Improve</strong>.<br>
-        <em>Critical reminder:</em> Completing a training module is <strong>not proof</strong> that user behavior has actually changed.</p>
+      <div class="info-card">
+        <h4>NIST SP 800-50 Rev. 1 (2024) Cycle</h4>
+        <p>A continuous cycle: <strong>Plan &rarr; Deliver &rarr; Measure Results &rarr; Improve</strong>.<br>
+        <em>Key Rule:</em> Completing a module is <strong>not proof</strong> that behavior changed!</p>
       </div>
 
-      <div class="note-card">
-        <h4>Self-Study &amp; Ethical Practice Rules</h4>
-        <p>Practice strictly on systems you own or authorized training environments (e.g., <strong>OWASP Juice Shop, WebGoat, official CTFs</strong>). Unauthorized testing is <strong>illegal even with good intentions</strong>, and verbal permission is <strong>never legally sufficient</strong>.</p>
+      <div class="info-card">
+        <h4>Self-Study &amp; Ethics</h4>
+        <p>Practice strictly on systems you own or sandboxes (<strong>OWASP Juice Shop, WebGoat, official CTFs</strong>). Unauthorized testing is illegal even with good intentions; verbal permission is never enough.</p>
       </div>
 
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Certification Type</th>
-              <th>Core Focus</th>
-              <th>Leading Examples</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Vendor-Neutral</strong></td>
-              <td>Fundamental concepts that apply across many products and platforms.</td>
-              <td>CompTIA Security+, ISC2 (CISSP, SSCP, CC), ISACA (CISA, CISM), GIAC.</td>
-            </tr>
-            <tr>
-              <td><strong>Vendor-Specific</strong></td>
-              <td>Hands-on operational skills for one company's specific proprietary products.</td>
-              <td>Fortinet NSE, Cisco (CCNA/CCNP), Microsoft Azure Security, AWS Security.</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="info-card">
+        <h4>Certifications &amp; Career Roadmap</h4>
+        <p>• <strong>Vendor-Neutral:</strong> Universal concepts across vendors (CompTIA Security+, ISC2 CISSP/SSCP/CC, ISACA CISA/CISM, GIAC).<br>
+        • <strong>Vendor-Specific:</strong> One vendor's technologies (Fortinet NSE, Cisco, AWS, Microsoft).<br>
+        • <strong>Associate of ISC2:</strong> Earned by passing exams before completing the 5-year experience requirement.<br>
+        • <strong>Maintenance:</strong> Requires annual Continuing Professional Education (CPE) credits and fees.<br>
+        • <strong>Roadmap:</strong> Degree &rarr; Entry vendor-neutral &rarr; Practitioner/vendor &rarr; Advanced/Management.</p>
       </div>
 
-      <div class="note-card">
-        <h4>Credential Maintenance &amp; Roadmap</h4>
-        <p>• <strong>CPEs:</strong> Credentials require Continuing Professional Education (CPE) credits and annual maintenance fees to stay active.<br>
-        • <strong>Associate of ISC2:</strong> A candidate who passes an ISC2 exam without the required 5 years of verified experience becomes an Associate of ISC2 while earning it.<br>
-        • <strong>Recommended Career Roadmap:</strong> BSIT Degree &rarr; Entry-level vendor-neutral (CC/Security+) &rarr; Practitioner/vendor-specific (SSCP/NSE) &rarr; Advanced/Management (CISSP/CISM). Reviewed annually.</p>
+      <div class="info-card">
+        <h4>Cyber Workforce Frameworks</h4>
+        <p>• <strong>DoD Manual 8140.03 (Feb 2023):</strong> Replaced DoD 8570.01-M. Ties qualification directly to Cyber Workforce roles rather than only certs.<br>
+        • <strong>NICE Framework (NIST SP 800-181):</strong> Universal language for cyber roles, tasks, knowledge, and skills.</p>
       </div>
+    </section>
 
-      <div class="note-card">
-        <h4>Cybersecurity Workforce Frameworks</h4>
-        <p>• <strong>DoD Manual 8140.03 (Feb 2023):</strong> Replaced DoD 8570.01-M. Ties baseline qualification requirements directly to defined <strong>work roles</strong> in the DoD Cyber Workforce Framework rather than relying solely on certifications.<br>
-        • <strong>NICE Workforce Framework (NIST SP 800-181):</strong> Standard common language for cybersecurity roles, tasks, knowledge, and skills for job descriptions and career planning.<br>
-        • <strong>Fortinet Micro-Credentials:</strong> Always follow the instructor's latest syllabus; never share accounts or exam answers.</p>
-      </div>
-    </div>
+    <!-- Section: Ethics & Canons -->
+    <section id="topic-ethics" class="note-topic">
+      <div class="topic-header">⚖️ 2. Ethics, Law &amp; Professional Codes</div>
 
-    <!-- Topic 2 -->
-    <div class="note-section">
-      <div class="note-title">2. Ethics, Compliance, and Laws</div>
-
-      <div class="note-card">
+      <div class="info-card">
         <h4>Law versus Ethics</h4>
-        <p>• <strong>Law:</strong> Written by government, enforced by courts; penalties include monetary fines or imprisonment.<br>
-        • <strong>Ethics:</strong> Moral values and professional codes of conduct; penalties include loss of trust, employment termination, or revocation of credentials.<br>
-        • <strong>Key Principle:</strong> An action can be <strong>legal but unethical</strong> (e.g., browsing a celebrity's medical records out of curiosity without clinical need). Professional codes often expect higher conduct than the law.</p>
+        <p>• <strong>Law:</strong> Government statutes enforced by courts (fines or jail).<br>
+        • <strong>Ethics:</strong> Professional values and codes (loss of trust, job, credentials).<br>
+        • <em>Crucial:</em> An action can be <strong>legal but unethical</strong> (e.g., viewing celebrity records out of curiosity without clinical need).</p>
       </div>
 
-      <div class="note-card">
+      <div class="info-card">
         <h4>ISC2 Code of Ethics (Strict Priority Order)</h4>
-        <ol style="margin-left: 20px; line-height: 1.8;">
+        <p style="margin-bottom:6px;">If duties conflict, the earlier canon <strong>always comes first</strong>:</p>
+        <ol style="margin-left: 20px; line-height: 1.7; font-size: 0.9rem;">
           <li><strong>Protect society, the common good, and public trust.</strong></li>
           <li><strong>Act honorably, honestly, justly, responsibly, and legally.</strong></li>
           <li><strong>Provide diligent and competent service.</strong></li>
           <li><strong>Advance and protect the profession.</strong></li>
         </ol>
-        <p style="margin-top: 8px;"><em>Hierarchy Rule:</em> If ethical duties conflict, the earlier canon <strong>always comes first</strong>.</p>
       </div>
 
-      <div class="note-card">
-        <h4>Professional Ethical Conduct</h4>
-        <p>• <strong>Responsible Disclosure:</strong> Upon noticing a security flaw, stop immediately, refrain from downloading or copying data, and report the vulnerability privately to the owner. Never exploit, publicly post, or demand money.<br>
-        • <strong>Conflict of Interest:</strong> Fully disclose any conflict and step away from the decision (<strong>recusal</strong>).<br>
-        • <strong>Improper Instructions:</strong> Explicitly refuse unethical orders (e.g., hiding incident logs from auditors) and escalate through proper reporting channels.</p>
+      <div class="info-card">
+        <h4>Workplace Ethical Actions</h4>
+        <p>• <strong>Responsible Disclosure:</strong> Stop immediately, refrain from taking data, report privately to owner. Never exploit, publicly post, or demand money.<br>
+        • <strong>Conflict of Interest:</strong> Disclose promptly and step away (<strong>recusal</strong>).<br>
+        • <strong>Improper Instructions:</strong> Refuse unethical requests (e.g., hiding logs from auditors) and escalate through proper channels.</p>
+      </div>
+    </section>
+
+    <!-- Section: Compliance Laws -->
+    <section id="topic-compliance" class="note-topic">
+      <div class="topic-header">📜 3. Regulatory Compliance Laws</div>
+      <div class="callout-box">
+        ⚠️ <strong>Compliance &ne; Security:</strong> Compliance is a minimum baseline. Passing an audit does not guarantee an organization won't be breached.
       </div>
 
-      <div class="highlight-box">
-        ⚠️ <strong>Compliance &ne; Security:</strong> Compliance is a minimum legal/contractual baseline and proof of adherence. An organization can pass every regulatory audit and still suffer a catastrophic security breach!
-      </div>
-
-      <div class="table-wrapper">
+      <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>Regulation / Standard</th>
-              <th>Entity Covered</th>
-              <th>Protected Asset</th>
+              <th>Rule</th>
+              <th>Covers</th>
+              <th>Protects</th>
               <th>Core Requirement</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>FISMA</strong></td>
-              <td>U.S. federal agencies &amp; contractors</td>
-              <td>Federal information &amp; systems</td>
-              <td>Risk-based, continuous monitoring using NIST standards (SP 800-37, SP 800-53).</td>
+              <td>U.S. Federal agencies &amp; contractors</td>
+              <td>Federal systems</td>
+              <td>Risk-based continuous monitoring (NIST SP 800-37, 800-53).</td>
             </tr>
             <tr>
               <td><strong>HIPAA</strong></td>
-              <td>Health plans, providers, clearinghouses</td>
-              <td>Protected Health Information (PHI)</td>
-              <td>Administrative, physical, and technical safeguards; Privacy, Security &amp; Breach rules.</td>
+              <td>Healthcare plans &amp; providers</td>
+              <td>PHI</td>
+              <td>Admin, Physical &amp; Technical safeguards; Privacy &amp; Breach rules.</td>
             </tr>
             <tr>
               <td><strong>GLBA</strong></td>
-              <td>Financial institutions (banks, lenders)</td>
-              <td>Nonpublic Personal Information (NPI)</td>
-              <td>Mandatory privacy notices and a written information security safeguards program.</td>
+              <td>Financial institutions</td>
+              <td>NPI</td>
+              <td>Privacy notices &amp; written security Safeguards Rule.</td>
             </tr>
             <tr>
               <td><strong>SOX</strong></td>
-              <td>U.S. publicly traded corporations</td>
-              <td>Financial records &amp; reporting</td>
-              <td>Internal controls; Section 302 requires CEO &amp; CFO to certify financial report accuracy.</td>
+              <td>U.S. public corporations</td>
+              <td>Financial reporting</td>
+              <td>Section 302: Executive certification of accurate financial controls.</td>
             </tr>
             <tr>
               <td><strong>FERPA</strong></td>
-              <td>Schools receiving U.S. federal education funds</td>
-              <td>Student education records &amp; grades</td>
-              <td>Prohibits disclosure without prior signed, written student consent.</td>
+              <td>Schools receiving federal funds</td>
+              <td>Student education records</td>
+              <td>Requires signed written student consent before records release.</td>
             </tr>
             <tr>
               <td><strong>CIPA</strong></td>
-              <td>Schools &amp; libraries with E-Rate discounts</td>
+              <td>Schools/libraries on E-Rate</td>
               <td>Minors online</td>
-              <td>Enforce Internet Safety Policies and technological content filtering against harmful material.</td>
+              <td>Internet safety policy &amp; content filtering against harmful material.</td>
             </tr>
             <tr>
               <td><strong>PCI DSS</strong></td>
-              <td>Anyone handling payment card data</td>
-              <td>Cardholder data (CHD)</td>
-              <td><strong>Contractual industry standard (not a law)</strong> with 12 requirements; current is v4.0.1 (v3.2.1 retired Mar 2024). Tokenization reduces scope.</td>
+              <td>Entities processing card data</td>
+              <td>Cardholder data</td>
+              <td><strong>Contractual standard (not law)</strong>; v4.0.1 is current. Tokenization reduces scope.</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
 
-    <!-- Topic 3 -->
-    <div class="note-section">
-      <div class="note-title">3. FISMA &amp; Philippine Cyber Legislation</div>
-
-      <div class="note-card">
-        <h4>FISMA Governance &amp; OPM Breach Lessons</h4>
-        <p>• Passed in 2002 and modernized in 2014. Applies to federal agencies and their IT contractors.<br>
-        • <strong>Governance Roles:</strong> OMB sets overarching policy; DHS/CISA oversees operations; NIST authors standards (SP 800-37 RMF, SP 800-53 controls); Inspectors General conduct independent audits; agencies report yearly.<br>
-        • <strong>Continuous Monitoring:</strong> FISMA mandates continuous monitoring because systems and cyber threats evolve daily.<br>
-        • <strong>2015 OPM Breach Lessons:</strong> Maintain a 100% complete system inventory, enforce strong authentication (MFA/smart cards), and patch vulnerabilities on time.</p>
+    <!-- Section: FISMA & OPM -->
+    <section id="topic-fisma" class="note-topic">
+      <div class="topic-header">🏛️ 4. FISMA &amp; Governance</div>
+      <div class="info-card">
+        <h4>FISMA Roles &amp; Responsibilities</h4>
+        <p>• <strong>OMB:</strong> Formulates federal cybersecurity policy.<br>
+        • <strong>DHS/CISA:</strong> Directs operational protection and security directives.<br>
+        • <strong>NIST:</strong> Publishes mandatory standards (RMF SP 800-37, SP 800-53 controls).<br>
+        • <strong>Inspectors General (IG):</strong> Perform independent annual audits.<br>
+        • <em>Continuous Monitoring:</em> Mandated because IT systems, configurations, and threats evolve daily.</p>
       </div>
 
-      <div class="note-card">
-        <h4>Philippine Laws (RA 10173 &amp; RA 10175)</h4>
-        <p>• <strong>RA 10173 (Data Privacy Act of 2012):</strong> Governs personal information processing based on three mandatory pillars:<br>
-        &nbsp;&nbsp;1. <strong>Transparency:</strong> Inform data subjects why and how their data is gathered.<br>
-        &nbsp;&nbsp;2. <strong>Legitimate Purpose:</strong> Process data only for lawful, declared reasons.<br>
-        &nbsp;&nbsp;3. <strong>Proportionality:</strong> Collect only the minimal necessary data.<br>
-        &nbsp;&nbsp;<em>Enforcement:</em> National Privacy Commission (NPC). Security breaches must generally be reported within <strong>72 hours</strong> of knowledge.<br>
-        • <strong>RA 10175 (Cybercrime Prevention Act of 2012):</strong> Establishes criminal penalties for offenses like illegal access, illegal interception, and data interference.</p>
+      <div class="info-card">
+        <h4>Lessons from the 2015 OPM Breach</h4>
+        <p>Over 21M records stolen. Key lessons:<br>
+        1. Maintain an accurate and complete system inventory.<br>
+        2. Implement strong authentication (MFA/smart cards).<br>
+        3. Patch vulnerable software and systems promptly.</p>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- SECTION 2: PRACTICE SCENARIOS (FLASHCARDS 1-10) -->
-  <div id="section-scenarios" class="card hidden">
-    <div class="controls">
-      <h2 style="font-size:1.2rem; font-weight:800;">Top 10 Practice Scenarios &amp; Answers</h2>
-      <button class="btn-tool" onclick="toggleAllAnswers()">Toggle All Answers</button>
-    </div>
-    <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:16px;">
-      Test your recall! Try answering each question mentally or verbally before tapping to reveal the answer.
-    </p>
+    <!-- Section: Philippine Cyber Legislation -->
+    <section id="topic-ph" class="note-topic">
+      <div class="topic-header">🇵🇭 5. Philippine Cyber Legislation</div>
+      <div class="info-card">
+        <h4>RA 10173 – Data Privacy Act of 2012</h4>
+        <p>Governed by three mandatory pillars:<br>
+        1. <strong>Transparency:</strong> Inform individuals why and how data is collected.<br>
+        2. <strong>Legitimate Purpose:</strong> Process only for lawful, declared reasons.<br>
+        3. <strong>Proportionality:</strong> Collect only the minimal necessary data.<br>
+        • <strong>Enforcement:</strong> National Privacy Commission (NPC).<br>
+        • <strong>Breach Notice:</strong> Report qualifying breaches within <strong>72 hours</strong> of knowledge.</p>
+      </div>
 
-    <div id="scenarios-container"></div>
-  </div>
+      <div class="info-card">
+        <h4>RA 10175 – Cybercrime Prevention Act of 2012</h4>
+        <p>Defines criminal penalties for offenses including illegal access (hacking), illegal interception, and data interference.</p>
+      </div>
+    </section>
+  </main>
 
-  <!-- SECTION 3: MULTIPLE CHOICE QUIZ -->
-  <div id="section-mcq" class="card hidden">
-    <div class="controls">
+  <!-- TAB 2: PRACTICE SCENARIOS (FLASHCARDS 1-10) -->
+  <main id="tab-scenarios" class="card hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
       <div>
-        <label for="mcq-topic" style="font-weight:700; margin-right:6px; font-size:0.9rem;">Topic Filter:</label>
-        <select id="mcq-topic" onchange="resetMcq()">
-          <option value="all">All Topics (32 Questions)</option>
-          <option value="Practice Scenarios">Practice Scenarios (1-10)</option>
-          <option value="Education & Certifications">Education, Training &amp; Certifications</option>
-          <option value="Ethics & Compliance">Ethics, Compliance &amp; Laws</option>
-          <option value="FISMA & Frameworks">FISMA, NIST &amp; Frameworks</option>
-        </select>
+        <h2 style="font-size:1.15rem; font-weight:800;">Top 10 Exam Scenarios</h2>
+        <p style="font-size:0.82rem; color:var(--text-muted);">Tap each card to reveal the verified answer.</p>
       </div>
-      <span class="score-badge" id="mcq-score">Score: 0 / 0</span>
+      <button class="tool-btn" onclick="toggleAllScenarios()" id="btn-toggle-all">Show All</button>
     </div>
 
-    <div id="mcq-quiz-area">
-      <div class="question-header" id="mcq-progress">Question 1 of 32</div>
-      <div class="question-text" id="mcq-question"></div>
-      <div class="options-grid" id="mcq-options"></div>
-      <div class="rationale hidden" id="mcq-rationale"></div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button class="btn-primary hidden" id="mcq-next-btn" onclick="nextMcq()">Next Question</button>
-        <button class="btn-primary" style="background: #64748b;" onclick="resetMcq()">Shuffle &amp; Restart</button>
-      </div>
+    <div id="flashcards-wrapper"></div>
+  </main>
+
+  <!-- TAB 3: MCQ QUIZ -->
+  <main id="tab-mcq" class="card hidden">
+    <div class="quiz-top">
+      <select id="mcq-topic-select" onchange="initMcqQuiz()" style="font-size:0.85rem; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text); max-width:65%;">
+        <option value="all">All Topics (32 Questions)</option>
+        <option value="Practice Scenarios">10 Practice Scenarios</option>
+        <option value="Education & Certifications">Education &amp; Certs</option>
+        <option value="Ethics & Compliance">Ethics &amp; Compliance</option>
+        <option value="FISMA & Frameworks">FISMA &amp; Frameworks</option>
+      </select>
+      <span class="quiz-score" id="mcq-score-badge">0 / 0</span>
     </div>
 
-    <div id="mcq-result-area" class="hidden">
-      <h2 style="font-size:1.4rem; font-weight:800;">Quiz Completed!</h2>
-      <p id="mcq-final-text" style="margin: 15px 0; font-size: 1.1rem;"></p>
-      <button class="btn-primary" onclick="resetMcq()">Retake MCQ Quiz</button>
-    </div>
-  </div>
-
-  <!-- SECTION 4: ACRONYM DRILL QUIZ -->
-  <div id="section-acronym" class="card hidden">
-    <div class="controls">
-      <div>
-        <label for="acronym-category" style="font-weight:700; margin-right:6px; font-size:0.9rem;">Category:</label>
-        <select id="acronym-category" onchange="resetAcronymQuiz()">
-          <option value="all">All Acronyms (47)</option>
-          <option value="Laws & Compliance">Laws &amp; Compliance</option>
-          <option value="Certifications & Orgs">Certifications &amp; Orgs</option>
-          <option value="Frameworks & Agencies">Frameworks, Agencies &amp; General</option>
-        </select>
-      </div>
-      <span class="score-badge" id="acr-score">Score: 0 / 0</span>
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="mcq-progress-bar"></div>
     </div>
 
-    <div id="acr-quiz-area">
-      <div class="question-header" id="acr-progress">Question 1</div>
-      <div class="question-text" id="acr-question"></div>
-      <div class="options-grid" id="acr-options"></div>
-      <div class="rationale hidden" id="acr-rationale"></div>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button class="btn-primary hidden" id="acr-next-btn" onclick="nextAcronym()">Next Acronym</button>
-        <button class="btn-primary" style="background: #64748b;" onclick="resetAcronymQuiz()">Shuffle &amp; Restart</button>
+    <div id="mcq-card-area">
+      <div class="quiz-badge" id="mcq-badge">Question 1 of 32</div>
+      <div class="quiz-question" id="mcq-q-text"></div>
+      <div class="options-list" id="mcq-opt-container"></div>
+      <div class="explanation-box hidden" id="mcq-rationale-box"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-action hidden" id="mcq-btn-next" onclick="stepNextMcq()">Next Question ➔</button>
+        <button class="tool-btn" style="padding:12px 14px;" onclick="initMcqQuiz()">🔄 Restart</button>
       </div>
     </div>
 
-    <div id="acr-result-area" class="hidden">
-      <h2 style="font-size:1.4rem; font-weight:800;">Acronym Drill Finished!</h2>
-      <p id="acr-final-text" style="margin: 15px 0; font-size: 1.1rem;"></p>
-      <button class="btn-primary" onclick="resetAcronymQuiz()">Restart Acronym Drill</button>
+    <div id="mcq-done-area" class="hidden" style="text-align:center; padding:20px 0;">
+      <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:8px;">🎉 Quiz Completed!</h3>
+      <p id="mcq-final-score" style="font-size:1.1rem; margin-bottom:16px;"></p>
+      <button class="btn-action" onclick="initMcqQuiz()">Retake Quiz</button>
     </div>
-  </div>
+  </main>
 
-  <!-- SECTION 5: ACRONYM REFERENCE TABLE -->
-  <div id="section-list" class="card hidden">
-    <div class="controls">
-      <input type="text" id="search-input" placeholder="🔍 Search acronym, meaning, or category..." onkeyup="filterTable()">
-      <span id="table-count" style="font-weight:700; color: var(--text-muted); font-size:0.9rem;">Showing 47 items</span>
+  <!-- TAB 4: ACRONYM DRILL -->
+  <main id="tab-acronym" class="card hidden">
+    <div class="quiz-top">
+      <select id="acr-filter-select" onchange="initAcrQuiz()" style="font-size:0.85rem; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:var(--surface); color:var(--text); max-width:65%;">
+        <option value="all">All Acronyms (47)</option>
+        <option value="Laws & Compliance">Laws &amp; Compliance</option>
+        <option value="Certifications & Orgs">Certifications &amp; Orgs</option>
+        <option value="Frameworks & Agencies">Frameworks &amp; Agencies</option>
+      </select>
+      <span class="quiz-score" id="acr-score-badge">0 / 0</span>
     </div>
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th style="width: 25%;">Acronym</th>
-            <th style="width: 50%;">Meaning</th>
-            <th style="width: 25%;">Category</th>
-          </tr>
-        </thead>
-        <tbody id="acronym-table-body"></tbody>
-      </table>
+
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="acr-progress-bar"></div>
     </div>
-  </div>
-</div>
+
+    <div id="acr-card-area">
+      <div class="quiz-badge" id="acr-badge">Acronym 1 of 47</div>
+      <div class="quiz-question" id="acr-q-text"></div>
+      <div class="options-list" id="acr-opt-container"></div>
+      <div class="explanation-box hidden" id="acr-rationale-box"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-action hidden" id="acr-btn-next" onclick="stepNextAcr()">Next Acronym ➔</button>
+        <button class="tool-btn" style="padding:12px 14px;" onclick="initAcrQuiz()">🔄 Restart</button>
+      </div>
+    </div>
+
+    <div id="acr-done-area" class="hidden" style="text-align:center; padding:20px 0;">
+      <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:8px;">🎉 Drill Completed!</h3>
+      <p id="acr-final-score" style="font-size:1.1rem; margin-bottom:16px;"></p>
+      <button class="btn-action" onclick="initAcrQuiz()">Restart Drill</button>
+    </div>
+  </main>
+
+  <!-- TAB 5: ACRONYM REFERENCE -->
+  <main id="tab-list" class="card hidden">
+    <div class="search-bar-wrap">
+      <input type="text" id="lookup-input" class="search-input" placeholder="🔍 Search acronym, meaning, or category..." onkeyup="filterAcronymCards()">
+    </div>
+    <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-muted); font-weight:700; margin-bottom:10px;">
+      <span id="lookup-count">Showing 47 items</span>
+      <span>Tap 📋 to copy</span>
+    </div>
+    <div id="acronym-cards-container"></div>
+  </main>
+
+  <!-- Fixed Android Bottom Navigation Bar -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="navigate('notes')">
+      <span class="nav-icon">📖</span>
+      <span>Notes</span>
+    </button>
+    <button class="nav-item" onclick="navigate('scenarios')">
+      <span class="nav-icon">⚡</span>
+      <span>Q&amp;A 1-10</span>
+    </button>
+    <button class="nav-item" onclick="navigate('mcq')">
+      <span class="nav-icon">📝</span>
+      <span>MCQ</span>
+    </button>
+    <button class="nav-item" onclick="navigate('acronym')">
+      <span class="nav-icon">🔤</span>
+      <span>Drill</span>
+    </button>
+    <button class="nav-item" onclick="navigate('list')">
+      <span class="nav-icon">📋</span>
+      <span>Lookup</span>
+    </button>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Copied to clipboard!</div>
 
 <script>
-  // Top 10 Practice Flashcard Scenarios
+  // Top 10 Practice Scenarios
   const scenariosData = [
     {
       id: 1,
@@ -876,9 +1033,8 @@
     }
   ];
 
-  // 32 Complete Multiple Choice Questions
+  // 32 Multiple Choice Questions
   const mcqData = [
-    // PRACTICE SCENARIOS (1-10)
     {
       topic: "Practice Scenarios",
       q: "A poster for all staff, a vendor course for firewall administrators, and a master's degree in cybersecurity: label each in exact order.",
@@ -999,8 +1155,6 @@
       answer: 0,
       rationale: "Responsible disclosure means stopping immediately, noting the basic URL/issue without taking data, and reporting privately to the company's security team—never downloading data, exploiting further, posting publicly, or demanding money."
     },
-
-    // EDUCATION, TRAINING & CERTIFICATIONS
     {
       topic: "Education & Certifications",
       q: "Which memory aid accurately distinguishes awareness, training, and education?",
@@ -1085,8 +1239,6 @@
       answer: 0,
       rationale: "A strong roadmap progresses from foundation to advanced as experience grows: degree, entry-level vendor-neutral credential, practitioner/vendor credentials, then management/advanced credentials, accounting for costs/renewal and reviewed yearly."
     },
-
-    // ETHICS, COMPLIANCE & LAWS
     {
       topic: "Ethics & Compliance",
       q: "How do law and ethics differ in terms of enforcement and penalties?",
@@ -1195,8 +1347,6 @@
       answer: 0,
       rationale: "RA 10175 is the Cybercrime Prevention Act of 2012, which defines and penalizes cybercrime offenses including illegal access, illegal interception, and data interference."
     },
-
-    // FISMA, NIST & FRAMEWORKS
     {
       topic: "FISMA & Frameworks",
       q: "Which workforce framework replaced DoD 8570.01-M in February 2023, and how did it change qualification requirements?",
@@ -1279,7 +1429,7 @@
     { acr: "SSCP", mean: "Systems Security Certified Practitioner", cat: "Certifications & Orgs" },
     { acr: "CCSP", mean: "Certified Cloud Security Professional", cat: "Certifications & Orgs" },
     { acr: "CSSLP", mean: "Certified Secure Software Lifecycle Professional", cat: "Certifications & Orgs" },
-    { acr: "CISA", mean: "Certified Information Systems Auditor (ISACA); in Week 14 also Cybersecurity and Infrastructure Security Agency", cat: "Certifications & Orgs" },
+    { acr: "CISA", mean: "Certified Information Systems Auditor (ISACA); also Cybersecurity and Infrastructure Security Agency", cat: "Certifications & Orgs" },
     { acr: "CISM", mean: "Certified Information Security Manager", cat: "Certifications & Orgs" },
     { acr: "ISACA", mean: "Information Systems Audit and Control Association", cat: "Certifications & Orgs" },
     { acr: "CEH", mean: "Certified Ethical Hacker", cat: "Certifications & Orgs" },
@@ -1322,7 +1472,7 @@
     { acr: "RA", mean: "Republic Act (RA 10173 Data Privacy Act; RA 10175 Cybercrime Prevention Act)", cat: "Laws & Compliance" }
   ];
 
-  // Utility: Shuffle Array
+  // Utility: Shuffle
   function shuffle(array) {
     const arr = [...array];
     for (let i = arr.length - 1; i > 0; i--) {
@@ -1332,189 +1482,229 @@
     return arr;
   }
 
-  // Render Practice Scenarios Flashcards
-  function renderScenarios() {
-    const container = document.getElementById('scenarios-container');
-    container.innerHTML = '';
-    scenariosData.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'scenario-card';
-      card.innerHTML = `
-        <span class="scenario-num">Scenario #${item.id}</span>
-        <div class="scenario-q">${item.q}</div>
-        <button class="reveal-btn" onclick="toggleAnswer(${item.id})">
-          <span id="btn-text-${item.id}">👁️ Show Answer</span>
-        </button>
-        <div class="scenario-answer hidden" id="answer-${item.id}">
-          ${item.answer}
-        </div>
-      `;
-      container.appendChild(card);
+  // Toast
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  // Clipboard copy
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Copied to clipboard!');
+    }).catch(() => {
+      showToast('Copied!');
     });
   }
 
-  function toggleAnswer(id) {
-    const ansBox = document.getElementById(`answer-${id}`);
-    const btnText = document.getElementById(`btn-text-${id}`);
-    if (ansBox.classList.contains('hidden')) {
-      ansBox.classList.remove('hidden');
-      btnText.textContent = '🙈 Hide Answer';
-    } else {
-      ansBox.classList.add('hidden');
-      btnText.textContent = '👁️ Show Answer';
-    }
-  }
-
-  let allAnswersShown = false;
-  function toggleAllAnswers() {
-    allAnswersShown = !allAnswersShown;
-    scenariosData.forEach(item => {
-      const ansBox = document.getElementById(`answer-${item.id}`);
-      const btnText = document.getElementById(`btn-text-${item.id}`);
-      if (allAnswersShown) {
-        ansBox.classList.remove('hidden');
-        btnText.textContent = '🙈 Hide Answer';
-      } else {
-        ansBox.classList.add('hidden');
-        btnText.textContent = '👁️ Show Answer';
-      }
-    });
-  }
-
-  // Tab Navigation
-  function switchTab(tab) {
-    const tabNames = ['notes', 'scenarios', 'mcq', 'acronym', 'list'];
-    document.querySelectorAll('.tab-btn').forEach((btn, index) => {
-      if (tabNames[index] === tab) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
-    });
-
-    tabNames.forEach(name => {
-      const el = document.getElementById(`section-${name}`);
-      if (name === tab) {
+  // Bottom Navigation
+  function navigate(tabId) {
+    const tabs = ['notes', 'scenarios', 'mcq', 'acronym', 'list'];
+    tabs.forEach(t => {
+      const el = document.getElementById(`tab-${t}`);
+      if (t === tabId) {
         el.classList.remove('hidden');
       } else {
         el.classList.add('hidden');
       }
     });
 
+    document.querySelectorAll('.bottom-nav .nav-item').forEach((btn, idx) => {
+      if (tabs[idx] === tabId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ---------------- MULTIPLE CHOICE LOGIC ----------------
-  let currentMcqList = [];
-  let mcqIndex = 0;
-  let mcqScore = 0;
-
-  function resetMcq() {
-    const topic = document.getElementById('mcq-topic').value;
-    const filtered = topic === 'all' ? mcqData : mcqData.filter(item => item.topic === topic);
-    currentMcqList = shuffle(filtered);
-    mcqIndex = 0;
-    mcqScore = 0;
-    document.getElementById('mcq-quiz-area').classList.remove('hidden');
-    document.getElementById('mcq-result-area').classList.add('hidden');
-    updateMcqScore();
-    renderMcq();
+  // Scroll to topic in Notes
+  function scrollToTopic(topicId) {
+    document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    const target = document.getElementById(topicId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
-  function updateMcqScore() {
-    document.getElementById('mcq-score').textContent = `Score: ${mcqScore} / ${mcqIndex}`;
-  }
-
-  function renderMcq() {
-    const item = currentMcqList[mcqIndex];
-    document.getElementById('mcq-progress').textContent = `Question ${mcqIndex + 1} of ${currentMcqList.length} (${item.topic})`;
-    document.getElementById('mcq-question').textContent = item.q;
-    document.getElementById('mcq-rationale').classList.add('hidden');
-    document.getElementById('mcq-next-btn').classList.add('hidden');
-
-    const optionsContainer = document.getElementById('mcq-options');
-    optionsContainer.innerHTML = '';
-
-    const mappedOptions = item.options.map((text, idx) => ({
-      text,
-      isCorrect: idx === item.answer
-    }));
-    const shuffledOptions = shuffle(mappedOptions);
-
-    shuffledOptions.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.className = 'option-btn';
-      btn.textContent = opt.text;
-      btn.onclick = () => selectMcqOption(btn, opt.isCorrect, shuffledOptions, item.rationale);
-      optionsContainer.appendChild(btn);
+  // Render Practice Scenarios
+  function renderScenarios() {
+    const wrap = document.getElementById('flashcards-wrapper');
+    wrap.innerHTML = '';
+    scenariosData.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'flashcard';
+      const cleanPlain = item.answer.replace(/<[^>]*>/g, ' ');
+      card.innerHTML = `
+        <div class="card-meta">
+          <span class="badge-scenario">Scenario #${item.id}</span>
+          <button class="btn-copy" onclick="copyText('Scenario #${item.id}: ${item.q.replace(/'/g, "\\'")}\\n\\nAnswer: ${cleanPlain.replace(/'/g, "\\'")}')">
+            📋 Copy
+          </button>
+        </div>
+        <div class="scenario-text">${item.q}</div>
+        <button class="btn-reveal" onclick="toggleCardAnswer(${item.id})">
+          <span id="btn-label-${item.id}">👁️ Reveal Answer</span>
+        </button>
+        <div class="answer-panel hidden" id="card-ans-${item.id}">
+          ${item.answer}
+        </div>
+      `;
+      wrap.appendChild(card);
     });
   }
 
-  function selectMcqOption(selectedBtn, isCorrect, allOptions, rationaleText) {
-    const buttons = document.querySelectorAll('#mcq-options .option-btn');
-    buttons.forEach((btn, i) => {
-      btn.disabled = true;
-      if (allOptions[i].isCorrect) {
-        btn.classList.add('correct');
+  function toggleCardAnswer(id) {
+    const ans = document.getElementById(`card-ans-${id}`);
+    const btn = document.getElementById(`btn-label-${id}`);
+    if (ans.classList.contains('hidden')) {
+      ans.classList.remove('hidden');
+      btn.textContent = '🙈 Hide Answer';
+    } else {
+      ans.classList.add('hidden');
+      btn.textContent = '👁️ Reveal Answer';
+    }
+  }
+
+  let allOpen = false;
+  function toggleAllScenarios() {
+    allOpen = !allOpen;
+    scenariosData.forEach(item => {
+      const ans = document.getElementById(`card-ans-${item.id}`);
+      const btn = document.getElementById(`btn-label-${item.id}`);
+      if (allOpen) {
+        ans.classList.remove('hidden');
+        btn.textContent = '🙈 Hide Answer';
+      } else {
+        ans.classList.add('hidden');
+        btn.textContent = '👁️ Reveal Answer';
+      }
+    });
+    document.getElementById('btn-toggle-all').textContent = allOpen ? 'Hide All' : 'Show All';
+  }
+
+  // ---------------- MCQ QUIZ ENGINE ----------------
+  let mcqList = [];
+  let mcqIdx = 0;
+  let mcqScore = 0;
+
+  function initMcqQuiz() {
+    const topic = document.getElementById('mcq-topic-select').value;
+    const filtered = topic === 'all' ? mcqData : mcqData.filter(i => i.topic === topic);
+    mcqList = shuffle(filtered);
+    mcqIdx = 0;
+    mcqScore = 0;
+
+    document.getElementById('mcq-card-area').classList.remove('hidden');
+    document.getElementById('mcq-done-area').classList.add('hidden');
+    updateMcqStats();
+    displayMcq();
+  }
+
+  function updateMcqStats() {
+    document.getElementById('mcq-score-badge').textContent = `${mcqScore} / ${mcqIdx}`;
+    const pct = mcqList.length > 0 ? (mcqIdx / mcqList.length) * 100 : 0;
+    document.getElementById('mcq-progress-bar').style.width = `${pct}%`;
+  }
+
+  function displayMcq() {
+    const item = mcqList[mcqIdx];
+    document.getElementById('mcq-badge').textContent = `Question ${mcqIdx + 1} of ${mcqList.length} • ${item.topic}`;
+    document.getElementById('mcq-q-text').textContent = item.q;
+    document.getElementById('mcq-rationale-box').classList.add('hidden');
+    document.getElementById('mcq-btn-next').classList.add('hidden');
+
+    const optWrap = document.getElementById('mcq-opt-container');
+    optWrap.innerHTML = '';
+
+    const opts = shuffle(item.options.map((t, i) => ({ text: t, isCorrect: i === item.answer })));
+    opts.forEach(opt => {
+      const b = document.createElement('button');
+      b.className = 'opt-btn';
+      b.innerHTML = `<span>○</span> <span>${opt.text}</span>`;
+      b.onclick = () => onSelectMcq(b, opt.isCorrect, opts, item.rationale);
+      optWrap.appendChild(b);
+    });
+  }
+
+  function onSelectMcq(btn, isCorrect, allOpts, rationale) {
+    const allButtons = document.querySelectorAll('#mcq-opt-container .opt-btn');
+    allButtons.forEach((b, i) => {
+      b.disabled = true;
+      if (allOpts[i].isCorrect) {
+        b.classList.add('correct');
+        b.querySelector('span').textContent = '✓';
       }
     });
 
     if (isCorrect) {
       mcqScore++;
     } else {
-      selectedBtn.classList.add('wrong');
+      btn.classList.add('wrong');
+      btn.querySelector('span').textContent = '✕';
     }
 
-    mcqIndex++;
-    updateMcqScore();
+    mcqIdx++;
+    updateMcqStats();
 
-    const rationaleBox = document.getElementById('mcq-rationale');
-    rationaleBox.innerHTML = `<strong>Explanation:</strong> ${rationaleText}`;
-    rationaleBox.classList.remove('hidden');
+    const box = document.getElementById('mcq-rationale-box');
+    box.innerHTML = `<strong>Explanation:</strong> ${rationale}`;
+    box.classList.remove('hidden');
 
-    const nextBtn = document.getElementById('mcq-next-btn');
-    nextBtn.textContent = mcqIndex < currentMcqList.length ? 'Next Question ➔' : 'See Final Results 🏆';
+    const nextBtn = document.getElementById('mcq-btn-next');
+    nextBtn.textContent = mcqIdx < mcqList.length ? 'Next Question ➔' : 'See Results 🏆';
     nextBtn.classList.remove('hidden');
   }
 
-  function nextMcq() {
-    if (mcqIndex < currentMcqList.length) {
-      renderMcq();
+  function stepNextMcq() {
+    if (mcqIdx < mcqList.length) {
+      displayMcq();
     } else {
-      document.getElementById('mcq-quiz-area').classList.add('hidden');
-      document.getElementById('mcq-result-area').classList.remove('hidden');
-      const pct = Math.round((mcqScore / currentMcqList.length) * 100);
-      document.getElementById('mcq-final-text').textContent = `You scored ${mcqScore} out of ${currentMcqList.length} (${pct}%).`;
+      document.getElementById('mcq-card-area').classList.add('hidden');
+      document.getElementById('mcq-done-area').classList.remove('hidden');
+      const pct = Math.round((mcqScore / mcqList.length) * 100);
+      document.getElementById('mcq-final-score').textContent = `You scored ${mcqScore} out of ${mcqList.length} (${pct}%).`;
     }
   }
 
-  // ---------------- ACRONYM QUIZ LOGIC ----------------
-  let currentAcrList = [];
-  let acrIndex = 0;
+  // ---------------- ACRONYM DRILL ENGINE ----------------
+  let acrList = [];
+  let acrIdx = 0;
   let acrScore = 0;
 
-  function resetAcronymQuiz() {
-    const cat = document.getElementById('acronym-category').value;
-    const filtered = cat === 'all' ? acronymData : acronymData.filter(item => item.cat === cat);
-    currentAcrList = shuffle(filtered);
-    acrIndex = 0;
+  function initAcrQuiz() {
+    const cat = document.getElementById('acr-filter-select').value;
+    const filtered = cat === 'all' ? acronymData : acronymData.filter(i => i.cat === cat);
+    acrList = shuffle(filtered);
+    acrIdx = 0;
     acrScore = 0;
-    document.getElementById('acr-quiz-area').classList.remove('hidden');
-    document.getElementById('acr-result-area').classList.add('hidden');
-    updateAcrScore();
-    renderAcronym();
+
+    document.getElementById('acr-card-area').classList.remove('hidden');
+    document.getElementById('acr-done-area').classList.add('hidden');
+    updateAcrStats();
+    displayAcr();
   }
 
-  function updateAcrScore() {
-    document.getElementById('acr-score').textContent = `Score: ${acrScore} / ${acrIndex}`;
+  function updateAcrStats() {
+    document.getElementById('acr-score-badge').textContent = `${acrScore} / ${acrIdx}`;
+    const pct = acrList.length > 0 ? (acrIdx / acrList.length) * 100 : 0;
+    document.getElementById('acr-progress-bar').style.width = `${pct}%`;
   }
 
-  function renderAcronym() {
-    const item = currentAcrList[acrIndex];
-    document.getElementById('acr-progress').textContent = `Acronym ${acrIndex + 1} of ${currentAcrList.length} (${item.cat})`;
-    document.getElementById('acr-question').textContent = `What does "${item.acr}" stand for?`;
-    document.getElementById('acr-rationale').classList.add('hidden');
-    document.getElementById('acr-next-btn').classList.add('hidden');
+  function displayAcr() {
+    const item = acrList[acrIdx];
+    document.getElementById('acr-badge').textContent = `Acronym ${acrIdx + 1} of ${acrList.length} • ${item.cat}`;
+    document.getElementById('acr-q-text').textContent = `What does "${item.acr}" stand for?`;
+    document.getElementById('acr-rationale-box').classList.add('hidden');
+    document.getElementById('acr-btn-next').classList.add('hidden');
+
+    const optWrap = document.getElementById('acr-opt-container');
+    optWrap.innerHTML = '';
 
     const distractors = shuffle(acronymData.filter(x => x.acr !== item.acr)).slice(0, 3);
     const choices = shuffle([
@@ -1522,99 +1712,103 @@
       ...distractors.map(d => ({ text: d.mean, isCorrect: false }))
     ]);
 
-    const optionsContainer = document.getElementById('acr-options');
-    optionsContainer.innerHTML = '';
-
-    choices.forEach(choice => {
-      const btn = document.createElement('button');
-      btn.className = 'option-btn';
-      btn.textContent = choice.text;
-      btn.onclick = () => selectAcrOption(btn, choice.isCorrect, choices, item);
-      optionsContainer.appendChild(btn);
+    choices.forEach(opt => {
+      const b = document.createElement('button');
+      b.className = 'opt-btn';
+      b.innerHTML = `<span>○</span> <span>${opt.text}</span>`;
+      b.onclick = () => onSelectAcr(b, opt.isCorrect, choices, item);
+      optWrap.appendChild(b);
     });
   }
 
-  function selectAcrOption(selectedBtn, isCorrect, allChoices, item) {
-    const buttons = document.querySelectorAll('#acr-options .option-btn');
-    buttons.forEach((btn, i) => {
-      btn.disabled = true;
-      if (allChoices[i].isCorrect) {
-        btn.classList.add('correct');
+  function onSelectAcr(btn, isCorrect, allOpts, item) {
+    const allButtons = document.querySelectorAll('#acr-opt-container .opt-btn');
+    allButtons.forEach((b, i) => {
+      b.disabled = true;
+      if (allOpts[i].isCorrect) {
+        b.classList.add('correct');
+        b.querySelector('span').textContent = '✓';
       }
     });
 
     if (isCorrect) {
       acrScore++;
     } else {
-      selectedBtn.classList.add('wrong');
+      btn.classList.add('wrong');
+      btn.querySelector('span').textContent = '✕';
     }
 
-    acrIndex++;
-    updateAcrScore();
+    acrIdx++;
+    updateAcrStats();
 
-    const rationaleBox = document.getElementById('acr-rationale');
-    rationaleBox.innerHTML = `<strong>${item.acr}:</strong> ${item.mean}`;
-    rationaleBox.classList.remove('hidden');
+    const box = document.getElementById('acr-rationale-box');
+    box.innerHTML = `<strong>${item.acr}:</strong> ${item.mean}`;
+    box.classList.remove('hidden');
 
-    const nextBtn = document.getElementById('acr-next-btn');
-    nextBtn.textContent = acrIndex < currentAcrList.length ? 'Next Acronym ➔' : 'See Final Results 🏆';
+    const nextBtn = document.getElementById('acr-btn-next');
+    nextBtn.textContent = acrIdx < acrList.length ? 'Next Acronym ➔' : 'See Results 🏆';
     nextBtn.classList.remove('hidden');
   }
 
-  function nextAcronym() {
-    if (acrIndex < currentAcrList.length) {
-      renderAcronym();
+  function stepNextAcr() {
+    if (acrIdx < acrList.length) {
+      displayAcr();
     } else {
-      document.getElementById('acr-quiz-area').classList.add('hidden');
-      document.getElementById('acr-result-area').classList.remove('hidden');
-      const pct = Math.round((acrScore / currentAcrList.length) * 100);
-      document.getElementById('acr-final-text').textContent = `You scored ${acrScore} out of ${currentAcrList.length} (${pct}%).`;
+      document.getElementById('acr-card-area').classList.add('hidden');
+      document.getElementById('acr-done-area').classList.remove('hidden');
+      const pct = Math.round((acrScore / acrList.length) * 100);
+      document.getElementById('acr-final-score').textContent = `You scored ${acrScore} out of ${acrList.length} (${pct}%).`;
     }
   }
 
-  // ---------------- REFERENCE TABLE LOGIC ----------------
-  function renderTable(data) {
-    const tbody = document.getElementById('acronym-table-body');
-    tbody.innerHTML = '';
-    data.forEach(row => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><strong>${row.acr}</strong></td>
-        <td>${row.mean}</td>
-        <td><span style="font-size:0.8rem; background:var(--surface-alt); padding:3px 8px; border-radius:12px; border:1px solid var(--border);">${row.cat}</span></td>
+  // ---------------- ACRONYM REFERENCE CARDS ----------------
+  function renderAcronymCards(list) {
+    const container = document.getElementById('acronym-cards-container');
+    container.innerHTML = '';
+    list.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'acronym-card-item';
+      div.innerHTML = `
+        <div class="acr-top">
+          <span class="acr-tag">${item.acr}</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="acr-category">${item.cat}</span>
+            <button class="btn-copy" onclick="copyText('${item.acr} = ${item.mean.replace(/'/g, "\\'")}')">📋</button>
+          </div>
+        </div>
+        <div class="acr-meaning">${item.mean}</div>
       `;
-      tbody.appendChild(tr);
+      container.appendChild(div);
     });
-    document.getElementById('table-count').textContent = `Showing ${data.length} items`;
+    document.getElementById('lookup-count').textContent = `Showing ${list.length} items`;
   }
 
-  function filterTable() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const filtered = acronymData.filter(item =>
-      item.acr.toLowerCase().includes(query) ||
-      item.mean.toLowerCase().includes(query) ||
-      item.cat.toLowerCase().includes(query)
+  function filterAcronymCards() {
+    const q = document.getElementById('lookup-input').value.toLowerCase();
+    const filtered = acronymData.filter(i => 
+      i.acr.toLowerCase().includes(q) ||
+      i.mean.toLowerCase().includes(q) ||
+      i.cat.toLowerCase().includes(q)
     );
-    renderTable(filtered);
+    renderAcronymCards(filtered);
   }
 
-  // Theme Toggle with LocalStorage
+  // Theme & Font Sizing
   function toggleTheme() {
     const isDark = document.body.getAttribute('data-theme') === 'dark';
-    const nextTheme = isDark ? 'light' : 'dark';
-    document.body.setAttribute('data-theme', nextTheme);
+    const next = isDark ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', next);
     document.getElementById('theme-btn').textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
-    localStorage.setItem('reviewer_theme', nextTheme);
+    localStorage.setItem('reviewer_theme', next);
   }
 
-  // Font Size Adjuster
-  let currentFontSize = 16;
-  function adjustFontSize(delta) {
-    currentFontSize = Math.max(13, Math.min(22, currentFontSize + delta));
-    document.body.style.fontSize = currentFontSize + 'px';
+  let baseFontSize = 16;
+  function adjustTextSize(delta) {
+    baseFontSize = Math.max(13, Math.min(22, baseFontSize + delta));
+    document.documentElement.style.fontSize = baseFontSize + 'px';
   }
 
-  // Initial Load
+  // Initialize
   const savedTheme = localStorage.getItem('reviewer_theme');
   if (savedTheme) {
     document.body.setAttribute('data-theme', savedTheme);
@@ -1622,9 +1816,9 @@
   }
 
   renderScenarios();
-  resetMcq();
-  resetAcronymQuiz();
-  renderTable(acronymData);
+  initMcqQuiz();
+  initAcrQuiz();
+  renderAcronymCards(acronymData);
 </script>
 
 </body>
